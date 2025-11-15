@@ -4,21 +4,21 @@ plugins {
     alias(libs.plugins.android.application)
     alias(libs.plugins.kotlin.android)
     alias(libs.plugins.kotlin.compose)
-    alias(libs.plugins.ksp)
+    id("android-application-convension")
 }
 
 android {
     namespace = "com.luongtran.cryptome"
     compileSdk {
-        version = release(36)
+        version = release(AppConfig.compileSdk)
     }
 
     defaultConfig {
         applicationId = "com.luongtran.cryptome"
-        minSdk = 24
-        targetSdk = 36
-        versionCode = 1
-        versionName = "1.0"
+        minSdk = AppConfig.minSdk
+        targetSdk = AppConfig.compileSdk
+        versionCode = AppConfig.versionCode
+        versionName = AppConfig.versionName
 
         testInstrumentationRunner = "androidx.test.runner.AndroidJUnitRunner"
     }
@@ -57,8 +57,6 @@ dependencies {
     implementation(libs.bundles.compose)
     implementation(platform(libs.koin.bom))
     implementation(libs.bundles.koin)
-    ksp(libs.androidx.room.compiler)
-    implementation(libs.bundles.room)
     testImplementation(libs.junit)
     androidTestImplementation(libs.androidx.junit)
     androidTestImplementation(libs.androidx.espresso.core)
