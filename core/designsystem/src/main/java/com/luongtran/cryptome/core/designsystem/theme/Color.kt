@@ -1,4 +1,4 @@
-package com.luongtran.cryptome.ui.theme
+package com.luongtran.cryptome.core.designsystem.theme
 
 import androidx.compose.ui.graphics.Color
 

@@ -1,6 +1,5 @@
-package com.luongtran.cryptome.ui.theme
+package com.luongtran.cryptome.core.designsystem.theme
 
-import android.app.Activity
 import android.os.Build
 import androidx.compose.foundation.isSystemInDarkTheme
 import androidx.compose.material3.MaterialTheme
