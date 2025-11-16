@@ -34,6 +34,12 @@ class MainActivity : ComponentActivity() {
                         homeScreen(
                             onSearchBarClick = {
                                 navController.navigateToSearch()
+                            },
+                            onFilterChipClick = {
+
+                            },
+                            onPurchasableCheckedChange = {
+
                             }
                         )
                         searchScreen()

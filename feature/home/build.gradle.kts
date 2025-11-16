@@ -9,6 +9,7 @@ android {
 
 dependencies {
     implementation(project(":core:designsystem"))
+    implementation(project(":core:ui"))
     implementation(libs.androidx.core.ktx)
     implementation(platform(libs.koin.bom))
     implementation(libs.bundles.koin)

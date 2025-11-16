@@ -6,6 +6,7 @@ import androidx.navigation.NavOptions
 import androidx.navigation.compose.composable
 import androidx.navigation.compose.navigation
 import com.luongtran.cryptome.feature.home.HomeScreen
+import com.luongtran.cryptome.feature.home.model.FilterOption
 import kotlinx.serialization.Serializable
 
 @Serializable
@@ -20,11 +21,15 @@ fun NavController.navigateToHome(
 
 fun NavGraphBuilder.homeScreen(
     onSearchBarClick: () -> Unit,
+    onFilterChipClick: (FilterOption) -> Unit,
+    onPurchasableCheckedChange: (Boolean) -> Unit,
 ) {
     navigation<HomeRoute>(startDestination = HomeScreen) {
         composable<HomeScreen>() {
             HomeScreen(
-                onSearchBarClick = onSearchBarClick
+                onSearchBarClick = onSearchBarClick,
+                onFilterChipClick = onFilterChipClick,
+                onPurchasableCheckedChange = onPurchasableCheckedChange,
             )
         }
     }
