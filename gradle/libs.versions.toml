@@ -54,6 +54,7 @@ kotlin-serialization = { id = "org.jetbrains.kotlin.plugin.serialization", versi
 ksp = { id = "com.google.devtools.ksp", version.ref = "ksp" }
 cryptome-module-android = { id = "android-library-convension" }
 cryptome-module-compose = { id = "android-compose-library-convension" }
+cryptome-module-kotlin = { id = "kotlin-library-convension" }
 
 [bundles]
 room = ["androidx-room-runtime", "androidx-room-ktx"]

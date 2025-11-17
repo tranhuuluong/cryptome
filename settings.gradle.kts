@@ -22,10 +22,10 @@ dependencyResolutionManagement {
 
 rootProject.name = "Cryptome"
 include(":app")
-include(":core:model")
 include(":core:database")
 include(":core:designsystem")
 include(":core:network")
+include(":core:ui")
+include(":core:domain")
 include(":feature:home")
 include(":feature:search")
-include(":core:ui")
