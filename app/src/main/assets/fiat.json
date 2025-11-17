@@ -1,0 +1,44 @@
+[
+  {
+    "id": "usd",
+    "name": "US Dollar",
+    "symbol": "$",
+    "code": "USD",
+    "priceUsd": "1.00"
+  },
+  {
+    "id": "eur",
+    "name": "Euro",
+    "symbol": "€",
+    "code": "EUR",
+    "priceUsd": "1.16"
+  },
+  {
+    "id": "jpy",
+    "name": "Japanese Yen",
+    "symbol": "¥",
+    "code": "JPY",
+    "priceUsd": "0.0065"
+  },
+  {
+    "id": "gbp",
+    "name": "British Pound",
+    "symbol": "£",
+    "code": "GBP",
+    "priceUsd": "1.31"
+  },
+  {
+    "id": "cny",
+    "name": "Chinese Yuan",
+    "symbol": "¥",
+    "code": "CNY",
+    "priceUsd": "0.14"
+  },
+  {
+    "id": "rub",
+    "name": "Russian Ruble",
+    "symbol": "₽",
+    "code": "RUB",
+    "priceUsd": "0.011"
+  }
+]

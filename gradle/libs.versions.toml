@@ -12,6 +12,8 @@ navigation = "2.9.6"
 room = "2.8.3"
 koin-bom = "4.1.1"
 ksp = "2.2.21-2.0.4"
+kotlin-serialization-json = "1.9.0"
+kotlin-coroutines = "1.10.2"
 
 [libraries]
 androidx-core-ktx = { group = "androidx.core", name = "core-ktx", version.ref = "coreKtx" }
@@ -32,6 +34,8 @@ androidx-compose-navigation = { module = "androidx.navigation:navigation-compose
 androidx-compose-material-iconsExtended = { group = "androidx.compose.material", name = "material-icons-extended" }
 gradle = { module = "com.android.tools.build:gradle", version.ref = "agp" }
 kotlin-gradle-plugin = { module = "org.jetbrains.kotlin:kotlin-gradle-plugin", version.ref = "kotlin" }
+kotlin-serialization-json = { module = "org.jetbrains.kotlinx:kotlinx-serialization-json", version.ref = "kotlin-serialization-json" }
+kotlin-coroutines-core = { module = "org.jetbrains.kotlinx:kotlinx-coroutines-core", version.ref = "kotlin-coroutines" }
 
 # Room
 androidx-room-runtime = { module = "androidx.room:room-runtime", version.ref = "room" }
@@ -40,6 +44,7 @@ androidx-room-compiler = { module = "androidx.room:room-compiler", version.ref =
 
 # Koin
 koin-bom = { module = "io.insert-koin:koin-bom", version.ref = "koin-bom" }
+koin-core = { module = "io.insert-koin:koin-core" }
 koin-android = { module = "io.insert-koin:koin-android" }
 koin-androix-compose = { module = "io.insert-koin:koin-androidx-compose" }
 koin-androix-compose-navigation = { module = "io.insert-koin:koin-androidx-compose-navigation" }
@@ -58,7 +63,7 @@ cryptome-module-kotlin = { id = "kotlin-library-convension" }
 
 [bundles]
 room = ["androidx-room-runtime", "androidx-room-ktx"]
-koin = ["koin-android", "koin-androix-compose", "koin-androix-compose-navigation"]
+koin-android = ["koin-android", "koin-androix-compose", "koin-androix-compose-navigation"]
 compose = [
     "androidx-compose-ui",
     "androidx-compose-ui-graphics",

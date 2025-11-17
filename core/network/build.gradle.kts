@@ -1,3 +1,12 @@
 plugins {
-    alias(libs.plugins.kotlin.jvm)
+    alias(libs.plugins.cryptome.module.kotlin)
+    alias(libs.plugins.kotlin.serialization)
+}
+
+dependencies {
+    implementation(project(":core:common"))
+    implementation(libs.kotlin.serialization.json)
+    implementation(platform(libs.koin.bom))
+    implementation(libs.koin.core)
+    implementation(libs.kotlin.coroutines.core)
 }

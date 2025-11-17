@@ -1,0 +1,128 @@
+[
+  {
+    "id": "btc",
+    "name": "Bitcoin",
+    "symbol": "BTC",
+    "priceUsd": "94938.11",
+    "changePercent24Hr": "0.9",
+    "marketCapUsd": "1899497843460",
+    "tradable": true
+  },
+  {
+    "id": "eth",
+    "name": "Ethereum",
+    "symbol": "ETH",
+    "priceUsd": "3171.91",
+    "changePercent24Hr": "0.1",
+    "marketCapUsd": "384396562094",
+    "tradable": true
+  },
+  {
+    "id": "cro",
+    "name": "Cronos",
+    "symbol": "CRO",
+    "priceUsd": "0.1114",
+    "changePercent24Hr": "-2.92",
+    "marketCapUsd": "4155949196",
+    "tradable": true
+  },
+  {
+    "id": "sol",
+    "name": "Solana",
+    "symbol": "SOL",
+    "priceUsd": "141.44",
+    "changePercent24Hr": "0.9",
+    "marketCapUsd": "78557735992",
+    "tradable": true
+  },
+  {
+    "id": "bnb",
+    "name": "BNB",
+    "symbol": "BNB",
+    "priceUsd": "926.63",
+    "changePercent24Hr": "0.7",
+    "marketCapUsd": "128097564560",
+    "tradable": true
+  },
+  {
+    "id": "usdt",
+    "name": "Tether",
+    "symbol": "USDT",
+    "priceUsd": "0.9994",
+    "changePercent24Hr": "0.0",
+    "marketCapUsd": "183912053273",
+    "tradable": true
+  },
+  {
+    "id": "usdc",
+    "name": "USD Coin",
+    "symbol": "USDC",
+    "priceUsd": "0.9997",
+    "changePercent24Hr": "0.0",
+    "marketCapUsd": "74876530773",
+    "tradable": true
+  },
+  {
+    "id": "xrp",
+    "name": "XRP",
+    "symbol": "XRP",
+    "priceUsd": "2.26",
+    "changePercent24Hr": "1.1",
+    "marketCapUsd": "136083391388",
+    "tradable": true
+  },
+  {
+    "id": "ada",
+    "name": "Cardano",
+    "symbol": "ADA",
+    "priceUsd": "0.4950",
+    "changePercent24Hr": "-2.42",
+    "marketCapUsd": "17760493666",
+    "tradable": true
+  },
+  {
+    "id": "trx",
+    "name": "TRON",
+    "symbol": "TRX",
+    "priceUsd": "0.2936",
+    "changePercent24Hr": "0.9",
+    "marketCapUsd": "27820946408",
+    "tradable": true
+  },
+  {
+    "id": "doge",
+    "name": "Dogecoin",
+    "symbol": "DOGE",
+    "priceUsd": "0.1615",
+    "changePercent24Hr": "0.2",
+    "marketCapUsd": "24558925212",
+    "tradable": true
+  },
+  {
+    "id": "avax",
+    "name": "Avalanche",
+    "symbol": "AVAX",
+    "priceUsd": "15.56",
+    "changePercent24Hr": "-2.35",
+    "marketCapUsd": "6706873368",
+    "tradable": true
+  },
+  {
+    "id": "bch",
+    "name": "Bitcoin Cash",
+    "symbol": "BCH",
+    "priceUsd": "495.38",
+    "changePercent24Hr": "-1.20",
+    "marketCapUsd": "9951650000",
+    "tradable": true
+  },
+  {
+    "id": "uni",
+    "name": "Uniswap",
+    "symbol": "UNI",
+    "priceUsd": "7.84",
+    "changePercent24Hr": "4.98",
+    "marketCapUsd": "5006997390",
+    "tradable": true
+  }
+]
