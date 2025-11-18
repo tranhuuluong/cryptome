@@ -8,8 +8,9 @@ android {
 }
 
 dependencies {
+    implementation(project(":core:domain"))
     ksp(libs.androidx.room.compiler)
-    implementation(libs.bundles.room)
+    api(libs.bundles.room)
     implementation(platform(libs.koin.bom))
     implementation(libs.koin.core)
     testImplementation(libs.junit)

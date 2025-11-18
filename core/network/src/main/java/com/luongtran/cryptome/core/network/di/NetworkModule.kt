@@ -1,5 +1,6 @@
 package com.luongtran.cryptome.core.network.di
 
+import com.luongtran.cryptome.core.common.qualifier.IoDispatcherQualifier
 import com.luongtran.cryptome.core.network.FakeRemoteDataSource
 import com.luongtran.cryptome.core.network.RemoteDataSource
 import kotlinx.serialization.json.Json
@@ -9,7 +10,7 @@ val networkModule = module {
     single<RemoteDataSource> {
         FakeRemoteDataSource(
             assetManager = get(),
-            ioDispatcher = get(),
+            ioDispatcher = get(IoDispatcherQualifier),
             networkJson = get(NetworkJsonQualifier)
         )
     }

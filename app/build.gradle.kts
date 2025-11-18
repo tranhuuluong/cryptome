@@ -47,7 +47,10 @@ android {
 }
 
 dependencies {
+    implementation(project(":core:common"))
     implementation(project(":core:designsystem"))
+    implementation(project(":core:network"))
+    implementation(project(":core:database"))
     implementation(project(":feature:home"))
     implementation(project(":feature:search"))
     implementation(libs.androidx.core.ktx)
@@ -56,7 +59,7 @@ dependencies {
     implementation(platform(libs.androidx.compose.bom))
     implementation(libs.bundles.compose)
     implementation(platform(libs.koin.bom))
-    implementation(libs.bundles.koin)
+    implementation(libs.bundles.koin.android)
     testImplementation(libs.junit)
     androidTestImplementation(libs.androidx.junit)
     androidTestImplementation(libs.androidx.espresso.core)

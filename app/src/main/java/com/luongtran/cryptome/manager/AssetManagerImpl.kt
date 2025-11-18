@@ -1,7 +1,7 @@
 package com.luongtran.cryptome.manager
 
 import android.content.Context
-import com.luongtran.cryptome.core.network.AssetManager
+import com.luongtran.cryptome.core.common.manager.AssetManager
 import java.io.InputStream
 
 class AssetManagerImpl(
