@@ -16,11 +16,11 @@ internal object FilterPreviewData {
     val filter1 = FilterUi(
         options = FilterOption.entries.toList(),
         selectedOption = FilterOption.All,
-        showPurchasable = false
+        showTradable = false
     )
 
     val filter2 = filter1.copy(
         selectedOption = FilterOption.Crypto,
-        showPurchasable = true
+        showTradable = true
     )
 }

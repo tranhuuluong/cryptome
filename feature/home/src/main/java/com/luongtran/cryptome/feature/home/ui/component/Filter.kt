@@ -30,8 +30,8 @@ fun Filter(
     uiModel: FilterUi,
     modifier: Modifier = Modifier,
     contentPadding: PaddingValues = PaddingValues(0.dp),
-    onFilterChipClick: (FilterOption) -> Unit = {},
-    onPurchasableCheckedChange: (Boolean) -> Unit = {},
+    onFilterOptionClick: (FilterOption) -> Unit = {},
+    onTradableClick: () -> Unit = {},
 ) {
     val layoutDirection = LocalLayoutDirection.current
     val paddingStart = remember(contentPadding, layoutDirection) {
@@ -69,15 +69,15 @@ fun Filter(
                     selected = option == uiModel.selectedOption,
                     label = stringResource(option.stringRes),
                     onSelectedChange = {
-                        onFilterChipClick(option)
+                        onFilterOptionClick(option)
                     }
                 )
             }
         }
         CryptomeCheckbox(
-            checked = uiModel.showPurchasable,
-            label = stringResource(R.string.purchasable),
-            onCheckedChange = onPurchasableCheckedChange,
+            checked = uiModel.showTradable,
+            label = stringResource(R.string.tradable),
+            onCheckedChange = { onTradableClick() },
         )
     }
 }

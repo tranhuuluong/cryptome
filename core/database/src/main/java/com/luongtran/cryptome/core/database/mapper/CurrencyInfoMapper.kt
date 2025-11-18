@@ -21,6 +21,7 @@ fun FiatCurrencyInfoEntity.toDomainModel() = CurrencyInfo.Fiat(
     symbol = symbol.orEmpty(),
     code = code.orEmpty(),
     priceUsd = priceUsd.toBigDecimalOrZero(),
+    tradable = tradable ?: false,
 )
 
 private fun String?.toBigDecimalOrZero() = this?.toBigDecimalOrNull() ?: BigDecimal.ZERO

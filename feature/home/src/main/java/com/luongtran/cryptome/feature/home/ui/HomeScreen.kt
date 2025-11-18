@@ -28,12 +28,9 @@ import androidx.lifecycle.compose.collectAsStateWithLifecycle
 import com.luongtran.cryptome.core.designsystem.theme.CryptomeTheme
 import com.luongtran.cryptome.feature.home.ui.component.ControlPanel
 import com.luongtran.cryptome.feature.home.ui.component.CurrencyList
-import com.luongtran.cryptome.feature.home.ui.component.CurrencyListPreviewData
 import com.luongtran.cryptome.feature.home.ui.component.Filter
-import com.luongtran.cryptome.feature.home.ui.component.FilterPreviewData
-import com.luongtran.cryptome.feature.home.ui.model.CurrencyUi
 import com.luongtran.cryptome.feature.home.ui.model.FilterOption
-import com.luongtran.cryptome.feature.home.ui.model.FilterUi
+import com.luongtran.cryptome.feature.home.ui.model.HomeUiState
 import org.koin.androidx.compose.koinViewModel
 
 @Composable
@@ -42,28 +39,27 @@ fun HomeScreen(
     viewModel: HomeViewModel = koinViewModel(),
     onSearchBarClick: () -> Unit,
 ) {
-    val currencies by viewModel.currencyList.collectAsStateWithLifecycle()
-    val filterUi by viewModel.filterUi.collectAsStateWithLifecycle()
+    val uiState by viewModel.uiState.collectAsStateWithLifecycle()
     HomeScreen(
         modifier = modifier,
-        currencies = currencies,
-        filterUi = filterUi,
+        uiState = uiState,
         onSearchBarClick = onSearchBarClick,
         onClearDataClick = viewModel::onClearDataClick,
-        onInsertDataClick = viewModel::onInsertDataClick
+        onInsertDataClick = viewModel::onInsertDataClick,
+        onFilterOptionClick = viewModel::onFilterOptionClick,
+        onTradableClick = viewModel::onTradableCheckedChange
     )
 }
 
 @Composable
 private fun HomeScreen(
     modifier: Modifier = Modifier,
-    currencies: List<CurrencyUi>,
-    filterUi: FilterUi,
+    uiState: HomeUiState,
     onSearchBarClick: () -> Unit = {},
     onClearDataClick: () -> Unit = {},
     onInsertDataClick: () -> Unit = {},
-    onFilterChipClick: (FilterOption) -> Unit = {},
-    onPurchasableCheckedChange: (Boolean) -> Unit = {},
+    onFilterOptionClick: (FilterOption) -> Unit = {},
+    onTradableClick: () -> Unit = {},
 ) {
     Column(
         modifier = modifier.fillMaxSize(),
@@ -79,16 +75,22 @@ private fun HomeScreen(
                 onInsertDataClick = onInsertDataClick
             )
         }
-        Filter(
-            uiModel = filterUi,
-            contentPadding = PaddingValues(horizontal = 16.dp),
-            onFilterChipClick = onFilterChipClick,
-            onPurchasableCheckedChange = onPurchasableCheckedChange,
-        )
-        CurrencyList(
-            currencies = currencies,
-            contentPadding = PaddingValues(horizontal = 16.dp)
-        )
+        when (uiState) {
+            is HomeUiState.Loading -> {}
+            is HomeUiState.Empty -> {}
+            is HomeUiState.Success -> {
+                Filter(
+                    uiModel = uiState.filterUi,
+                    contentPadding = PaddingValues(horizontal = 16.dp),
+                    onFilterOptionClick = onFilterOptionClick,
+                    onTradableClick = onTradableClick,
+                )
+                CurrencyList(
+                    currencies = uiState.currencies,
+                    contentPadding = PaddingValues(horizontal = 16.dp)
+                )
+            }
+        }
     }
 }
 
@@ -136,10 +138,7 @@ private fun SearchBar(
 private fun HomeScreenPreview() {
     CryptomeTheme {
         Surface {
-            HomeScreen(
-                currencies = CurrencyListPreviewData.data,
-                filterUi = FilterPreviewData.filter1
-            )
+            HomeScreen(uiState = HomeUiState.Loading)
         }
     }
 }

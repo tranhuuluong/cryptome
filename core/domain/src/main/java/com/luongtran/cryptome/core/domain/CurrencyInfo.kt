@@ -19,5 +19,6 @@ sealed interface CurrencyInfo {
         val symbol: String,
         val code: String,
         val priceUsd: BigDecimal,
+        val tradable: Boolean,
     ) : CurrencyInfo
 }

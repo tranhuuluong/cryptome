@@ -14,5 +14,7 @@ data class FiatCurrencyInfoDto(
     @SerialName("code")
     val code: String? = null,
     @SerialName("priceUsd")
-    val priceUsd: String? = null
+    val priceUsd: String? = null,
+    @SerialName("tradable")
+    val tradable: Boolean? = null
 )

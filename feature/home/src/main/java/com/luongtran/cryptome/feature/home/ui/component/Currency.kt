@@ -44,8 +44,15 @@ fun CurrencyList(
             key = { currency -> currency.id }
         ) { currency ->
             when (currency) {
-                is CurrencyUi.Crypto -> CryptoCurrencyItem(uiModel = currency)
-                is CurrencyUi.Fiat -> FiatCurrencyItem(uiModel = currency)
+                is CurrencyUi.Crypto -> CryptoCurrencyItem(
+                    modifier = Modifier.animateItem(),
+                    uiModel = currency,
+                )
+
+                is CurrencyUi.Fiat -> FiatCurrencyItem(
+                    modifier = Modifier.animateItem(),
+                    uiModel = currency,
+                )
             }
         }
     }
@@ -67,7 +74,8 @@ private fun CryptoCurrencyItem(
         CurrencyNameAndCode(
             modifier = Modifier.weight(1f),
             name = uiModel.name,
-            code = uiModel.symbol
+            code = uiModel.symbol,
+            tradable = uiModel.tradable,
         )
         Column(
             horizontalAlignment = Alignment.End,
@@ -95,7 +103,8 @@ private fun FiatCurrencyItem(
         CurrencyNameAndCode(
             modifier = Modifier.weight(1f),
             name = uiModel.name,
-            code = uiModel.code
+            code = uiModel.code,
+            tradable = uiModel.tradable,
         )
         CurrencyPrice(
             modifier = Modifier.weight(1f),
@@ -118,9 +127,10 @@ private fun CurrencyIcon(
 
 @Composable
 private fun CurrencyNameAndCode(
-    modifier: Modifier,
+    modifier: Modifier = Modifier,
     name: String,
     code: String,
+    tradable: Boolean,
 ) {
     Column(
         modifier = modifier,
@@ -135,6 +145,11 @@ private fun CurrencyNameAndCode(
             text = code.uppercase(),
             style = MaterialTheme.typography.labelMedium,
             color = MaterialTheme.colorScheme.onSurfaceVariant
+        )
+        Text(
+            text = if (tradable) "Tradable" else "Not Tradable",
+            style = MaterialTheme.typography.labelSmall,
+            color = if (tradable) AccentGreen else AccentRed
         )
     }
 }

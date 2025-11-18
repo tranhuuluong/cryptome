@@ -33,7 +33,7 @@
     "priceUsd": "141.44",
     "changePercent24Hr": "0.9",
     "marketCapUsd": "78557735992",
-    "tradable": true
+    "tradable": false
   },
   {
     "id": "bnb",
@@ -51,7 +51,7 @@
     "priceUsd": "0.9994",
     "changePercent24Hr": "0.0",
     "marketCapUsd": "183912053273",
-    "tradable": true
+    "tradable": false
   },
   {
     "id": "usdc",
@@ -60,7 +60,7 @@
     "priceUsd": "0.9997",
     "changePercent24Hr": "0.0",
     "marketCapUsd": "74876530773",
-    "tradable": true
+    "tradable": false
   },
   {
     "id": "xrp",
@@ -87,7 +87,7 @@
     "priceUsd": "0.2936",
     "changePercent24Hr": "0.9",
     "marketCapUsd": "27820946408",
-    "tradable": true
+    "tradable": false
   },
   {
     "id": "doge",
@@ -96,7 +96,7 @@
     "priceUsd": "0.1615",
     "changePercent24Hr": "0.2",
     "marketCapUsd": "24558925212",
-    "tradable": true
+    "tradable": false
   },
   {
     "id": "avax",
@@ -114,7 +114,7 @@
     "priceUsd": "495.38",
     "changePercent24Hr": "-1.20",
     "marketCapUsd": "9951650000",
-    "tradable": true
+    "tradable": false
   },
   {
     "id": "uni",
@@ -123,6 +123,6 @@
     "priceUsd": "7.84",
     "changePercent24Hr": "4.98",
     "marketCapUsd": "5006997390",
-    "tradable": true
+    "tradable": false
   }
 ]

@@ -4,8 +4,9 @@ import androidx.compose.ui.graphics.Color
 
 // Brand Core
 val BlueBrand = Color(0xFF092D74)
-val BlueDarkBrand = Color(0xFF051941)
+val BlueDarkBrand = Color(0xFF0B1426)
 val White = Color(0xFFFFFFFF)
+
 // Primary
 val Primary = Color(0xFF0A3A9A)
 val PrimaryVariant = Color(0xFF0E4CC4)

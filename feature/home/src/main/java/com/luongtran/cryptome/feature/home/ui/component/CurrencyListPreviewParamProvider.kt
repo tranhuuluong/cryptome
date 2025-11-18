@@ -25,7 +25,8 @@ internal object CurrencyListPreviewData {
                 value = 1.02,
                 formatted = "+1.02%"
             ),
-            iconRes = RUi.drawable.btc
+            iconRes = RUi.drawable.btc,
+            tradable = true,
         ),
         CurrencyUi.Crypto(
             id = "ETH",
@@ -39,7 +40,8 @@ internal object CurrencyListPreviewData {
                 value = 0.07,
                 formatted = "+0.07%"
             ),
-            iconRes = RUi.drawable.eth
+            iconRes = RUi.drawable.eth,
+            tradable = true,
         ),
         CurrencyUi.Crypto(
             id = "USDT",
@@ -53,7 +55,8 @@ internal object CurrencyListPreviewData {
                 value = 0.01,
                 formatted = "+0.01%"
             ),
-            iconRes = RUi.drawable.usdt
+            iconRes = RUi.drawable.usdt,
+            tradable = false,
         ),
         CurrencyUi.Crypto(
             id = "BNB",
@@ -67,7 +70,8 @@ internal object CurrencyListPreviewData {
                 value = -0.34,
                 formatted = "-0.34%"
             ),
-            iconRes = RUi.drawable.bnb
+            iconRes = RUi.drawable.bnb,
+            tradable = false,
         ),
         CurrencyUi.Crypto(
             id = "SOL",
@@ -81,7 +85,8 @@ internal object CurrencyListPreviewData {
                 value = 2.31,
                 formatted = "+2.31%"
             ),
-            iconRes = RUi.drawable.sol
+            iconRes = RUi.drawable.sol,
+            tradable = false,
         ),
         CurrencyUi.Crypto(
             id = "XRP",
@@ -95,7 +100,8 @@ internal object CurrencyListPreviewData {
                 value = -1.12,
                 formatted = "-1.12%"
             ),
-            iconRes = RUi.drawable.xrp
+            iconRes = RUi.drawable.xrp,
+            tradable = true,
         ),
         CurrencyUi.Crypto(
             id = "USDC",
@@ -109,7 +115,8 @@ internal object CurrencyListPreviewData {
                 value = 0.00,
                 formatted = "0.00%"
             ),
-            iconRes = RUi.drawable.usdc
+            iconRes = RUi.drawable.usdc,
+            tradable = false,
         ),
         CurrencyUi.Crypto(
             id = "ADA",
@@ -123,7 +130,8 @@ internal object CurrencyListPreviewData {
                 value = 1.41,
                 formatted = "+1.41%"
             ),
-            iconRes = RUi.drawable.ada
+            iconRes = RUi.drawable.ada,
+            tradable = true,
         ),
         CurrencyUi.Crypto(
             id = "DOGE",
@@ -137,7 +145,8 @@ internal object CurrencyListPreviewData {
                 value = -0.08,
                 formatted = "-0.08%"
             ),
-            iconRes = RUi.drawable.doge
+            iconRes = RUi.drawable.doge,
+            tradable = false,
         ),
         CurrencyUi.Crypto(
             id = "AVAX",
@@ -151,7 +160,8 @@ internal object CurrencyListPreviewData {
                 value = 3.44,
                 formatted = "+3.44%"
             ),
-            iconRes = RUi.drawable.avax
+            iconRes = RUi.drawable.avax,
+            tradable = true,
         ),
         CurrencyUi.Crypto(
             id = "TRX",
@@ -165,7 +175,8 @@ internal object CurrencyListPreviewData {
                 value = 0.55,
                 formatted = "+0.55%"
             ),
-            iconRes = RUi.drawable.trx
+            iconRes = RUi.drawable.trx,
+            tradable = false,
         ),
         CurrencyUi.Fiat(
             id = "USD",
@@ -176,7 +187,8 @@ internal object CurrencyListPreviewData {
                 value = 1,
                 formatted = "$1.00"
             ),
-            iconRes = RUi.drawable.usd
+            iconRes = RUi.drawable.usd,
+            tradable = false,
         )
     )
 }

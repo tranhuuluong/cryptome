@@ -21,4 +21,5 @@ fun FiatCurrencyInfoDto.toEntity() = FiatCurrencyInfoEntity(
     symbol = symbol,
     code = code,
     priceUsd = priceUsd,
+    tradable = tradable,
 )

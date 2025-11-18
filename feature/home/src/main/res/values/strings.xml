@@ -6,5 +6,5 @@
     <string name="control_panel">Control Panel</string>
     <string name="insert_data">Insert Data</string>
     <string name="clear_data">Clear Data</string>
-    <string name="purchasable">Purchasable</string>
+    <string name="tradable">Tradable</string>
 </resources>

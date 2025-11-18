@@ -48,7 +48,7 @@ fun CryptomeCheckbox(
 private fun CryptomeCheckboxPreview() {
     CryptomeTheme {
         Surface {
-            CryptomeCheckbox(checked = true, label = "Purchasable")
+            CryptomeCheckbox(checked = true, label = "Tradable")
         }
     }
 }

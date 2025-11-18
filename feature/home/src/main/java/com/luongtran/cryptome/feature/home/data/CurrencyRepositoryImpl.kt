@@ -1,16 +1,17 @@
 package com.luongtran.cryptome.feature.home.data
 
 import com.luongtran.cryptome.core.common.model.DataStateSuccess
+import com.luongtran.cryptome.core.common.utils.mapItems
 import com.luongtran.cryptome.core.database.CryptomeDatabase
 import com.luongtran.cryptome.core.database.mapper.toDomainModel
 import com.luongtran.cryptome.core.domain.CurrencyInfo
+import com.luongtran.cryptome.core.domain.CurrencyType
 import com.luongtran.cryptome.core.network.RemoteDataSource
 import com.luongtran.cryptome.feature.home.data.mapper.toEntity
 import com.luongtran.cryptome.feature.home.domain.CurrencyRepository
 import kotlinx.coroutines.coroutineScope
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.combine
-import kotlinx.coroutines.flow.map
 import kotlinx.coroutines.launch
 
 class CurrencyRepositoryImpl(
@@ -20,11 +21,19 @@ class CurrencyRepositoryImpl(
     private val cryptoDao = database.cryptoDao()
     private val fiatDao = database.fiatDao()
 
-    override fun getAllCurrencies(): Flow<List<CurrencyInfo>> = combine(
-        cryptoDao.getCryptoCurrencies().map { entities -> entities.map { it.toDomainModel() } },
-        fiatDao.getFiatCurrencies().map { entities -> entities.map { it.toDomainModel() } },
-    ) { cryptoCurrencies, fiatCurrencies ->
-        cryptoCurrencies + fiatCurrencies
+    override fun getCurrencies(
+        tradableOnly: Boolean,
+        currencyType: CurrencyType
+    ): Flow<List<CurrencyInfo>> {
+        val cryptoFlow = (if (tradableOnly) cryptoDao.getTradable() else cryptoDao.getAll())
+            .mapItems { entity -> entity.toDomainModel() }
+        val fiatFlow = (if (tradableOnly) fiatDao.getTradable() else fiatDao.getAll())
+            .mapItems { entity -> entity.toDomainModel() }
+        return when (currencyType) {
+            CurrencyType.All -> combine(cryptoFlow, fiatFlow) { cryptos, fiats -> cryptos + fiats }
+            CurrencyType.Crypto -> cryptoFlow
+            CurrencyType.Fiat -> fiatFlow
+        }
     }
 
     override suspend fun insertData(): Unit = coroutineScope {

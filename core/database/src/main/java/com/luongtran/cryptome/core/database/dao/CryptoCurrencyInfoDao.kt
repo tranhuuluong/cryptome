@@ -12,7 +12,15 @@ interface CryptoCurrencyInfoDao {
     suspend fun upsert(currencies: List<CryptoCurrencyInfoEntity>)
 
     @Query("SELECT * FROM ${CryptoCurrencyInfoEntity.TABLE_NAME}")
-    fun getCryptoCurrencies(): Flow<List<CryptoCurrencyInfoEntity>>
+    fun getAll(): Flow<List<CryptoCurrencyInfoEntity>>
+
+    @Query(
+        """
+        SELECT * FROM ${CryptoCurrencyInfoEntity.TABLE_NAME}
+        WHERE ${CryptoCurrencyInfoEntity.COLUMN_TRADABLE} = 1
+        """
+    )
+    fun getTradable(): Flow<List<CryptoCurrencyInfoEntity>>
 
     @Query("DELETE FROM ${CryptoCurrencyInfoEntity.TABLE_NAME}")
     suspend fun deleteAll()

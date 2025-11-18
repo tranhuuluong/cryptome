@@ -12,6 +12,7 @@ sealed interface CurrencyUi {
         val symbol: String,
         val price: DisplayableNumber,
         val changePercent24Hr: DisplayableNumber,
+        val tradable: Boolean,
         @param:DrawableRes val iconRes: Int,
     ) : CurrencyUi
 
@@ -21,6 +22,7 @@ sealed interface CurrencyUi {
         val symbol: String,
         val code: String,
         val exchangeRateToUsd: DisplayableNumber,
+        val tradable: Boolean,
         @param:DrawableRes val iconRes: Int,
-    ): CurrencyUi
+    ) : CurrencyUi
 }

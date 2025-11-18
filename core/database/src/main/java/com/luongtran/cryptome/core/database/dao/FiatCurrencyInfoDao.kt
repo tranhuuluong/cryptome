@@ -12,7 +12,15 @@ interface FiatCurrencyInfoDao {
     suspend fun upsert(currencies: List<FiatCurrencyInfoEntity>)
 
     @Query("SELECT * FROM ${FiatCurrencyInfoEntity.TABLE_NAME}")
-    fun getFiatCurrencies(): Flow<List<FiatCurrencyInfoEntity>>
+    fun getAll(): Flow<List<FiatCurrencyInfoEntity>>
+
+    @Query(
+        """
+        SELECT * FROM ${FiatCurrencyInfoEntity.TABLE_NAME}
+        WHERE ${FiatCurrencyInfoEntity.COLUMN_TRADABLE} = 1
+        """
+    )
+    fun getTradable(): Flow<List<FiatCurrencyInfoEntity>>
 
     @Query("DELETE FROM ${FiatCurrencyInfoEntity.TABLE_NAME}")
     suspend fun deleteAll()
