@@ -13,6 +13,7 @@ import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.outlined.Search
+import androidx.compose.material3.CircularProgressIndicator
 import androidx.compose.material3.Icon
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Surface
@@ -29,6 +30,7 @@ import com.luongtran.cryptome.core.designsystem.theme.CryptomeTheme
 import com.luongtran.cryptome.feature.home.ui.component.ControlPanel
 import com.luongtran.cryptome.feature.home.ui.component.CurrencyList
 import com.luongtran.cryptome.feature.home.ui.component.Filter
+import com.luongtran.cryptome.feature.home.ui.component.HomeEmptyView
 import com.luongtran.cryptome.feature.home.ui.model.FilterOption
 import com.luongtran.cryptome.feature.home.ui.model.HomeUiState
 import org.koin.androidx.compose.koinViewModel
@@ -63,7 +65,8 @@ private fun HomeScreen(
 ) {
     Column(
         modifier = modifier.fillMaxSize(),
-        verticalArrangement = Arrangement.spacedBy(8.dp)
+        verticalArrangement = Arrangement.spacedBy(8.dp),
+        horizontalAlignment = Alignment.CenterHorizontally,
     ) {
         Column(
             modifier = Modifier.padding(16.dp),
@@ -76,8 +79,17 @@ private fun HomeScreen(
             )
         }
         when (uiState) {
-            is HomeUiState.Loading -> {}
-            is HomeUiState.Empty -> {}
+            is HomeUiState.Loading -> CircularProgressIndicator()
+            is HomeUiState.Empty -> {
+                Filter(
+                    uiModel = uiState.filterUi,
+                    contentPadding = PaddingValues(horizontal = 16.dp),
+                    onFilterOptionClick = onFilterOptionClick,
+                    onTradableClick = onTradableClick,
+                )
+                HomeEmptyView()
+            }
+
             is HomeUiState.Success -> {
                 Filter(
                     uiModel = uiState.filterUi,

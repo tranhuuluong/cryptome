@@ -9,7 +9,7 @@ import com.luongtran.cryptome.feature.home.ui.model.FilterUi
 import com.luongtran.cryptome.feature.home.ui.model.HomeUiState
 
 fun List<CurrencyInfo>.toHomeUiState(filterUi: FilterUi) = when {
-    isEmpty() -> HomeUiState.Empty
+    isEmpty() -> HomeUiState.Empty(filterUi)
     else -> HomeUiState.Success(
         currencies = map { it.toUiModel() },
         filterUi = filterUi
