@@ -13,7 +13,9 @@ dependencies {
     api(libs.bundles.room)
     implementation(platform(libs.koin.bom))
     implementation(libs.koin.core)
-    testImplementation(libs.junit)
+    testImplementation(libs.kotlin.coroutines.test)
+    testImplementation(libs.robolectric)
+    testImplementation(libs.androidx.core.ktx.test)
     androidTestImplementation(libs.androidx.junit)
     androidTestImplementation(libs.androidx.espresso.core)
 }

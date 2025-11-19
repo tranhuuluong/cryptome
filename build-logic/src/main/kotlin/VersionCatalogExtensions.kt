@@ -27,6 +27,9 @@ internal val VersionCatalog.composeUiTooling
 internal val VersionCatalog.junit
     get() = findLibraryOrThrow("junit")
 
+internal val VersionCatalog.mockk
+    get() = findLibraryOrThrow("mockk")
+
 private fun VersionCatalog.findPluginOrThrow(name: String) =
     findPlugin(name)
         .orElseThrow { NoSuchElementException("Plugin $name not found in version catalog") }
