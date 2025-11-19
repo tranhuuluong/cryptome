@@ -11,6 +11,7 @@ import androidx.room.PrimaryKey
         Index(value = [CryptoCurrencyInfoEntity.COLUMN_SYMBOL]),
         Index(value = [CryptoCurrencyInfoEntity.COLUMN_NAME]),
         Index(value = [CryptoCurrencyInfoEntity.COLUMN_TRADABLE]),
+        Index(value = [CryptoCurrencyInfoEntity.COLUMN_RANK]),
     ]
 )
 data class CryptoCurrencyInfoEntity(
@@ -28,7 +29,9 @@ data class CryptoCurrencyInfoEntity(
     @ColumnInfo(COLUMN_MARKET_CAP_USD)
     val marketCapUsd: String? = null,
     @ColumnInfo(COLUMN_TRADABLE)
-    val tradable: Boolean? = null
+    val tradable: Boolean? = null,
+    @ColumnInfo(COLUMN_RANK)
+    val rank: Int? = null,
 ) {
     companion object {
         const val TABLE_NAME = "crypto_currency_info"
@@ -39,5 +42,6 @@ data class CryptoCurrencyInfoEntity(
         const val COLUMN_CHANGE_PERCENT_24HR = "change_percent_24hr"
         const val COLUMN_MARKET_CAP_USD = "market_cap_usd"
         const val COLUMN_TRADABLE = "tradable"
+        const val COLUMN_RANK = "rank"
     }
 }

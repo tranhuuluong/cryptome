@@ -13,6 +13,7 @@ fun CryptoCurrencyInfoDto.toEntity() = CryptoCurrencyInfoEntity(
     changePercent24Hr = changePercent24Hr,
     marketCapUsd = marketCapUsd,
     tradable = tradable,
+    rank = rank,
 )
 
 fun FiatCurrencyInfoDto.toEntity() = FiatCurrencyInfoEntity(

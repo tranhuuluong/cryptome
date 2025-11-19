@@ -8,7 +8,7 @@ import androidx.room.PrimaryKey
 @Entity(
     tableName = FiatCurrencyInfoEntity.TABLE_NAME,
     indices = [
-        Index(value = [FiatCurrencyInfoEntity.COLUMN_SYMBOL]),
+        Index(value = [FiatCurrencyInfoEntity.COLUMN_CODE]),
         Index(value = [FiatCurrencyInfoEntity.COLUMN_NAME]),
         Index(value = [FiatCurrencyInfoEntity.COLUMN_TRADABLE]),
     ]

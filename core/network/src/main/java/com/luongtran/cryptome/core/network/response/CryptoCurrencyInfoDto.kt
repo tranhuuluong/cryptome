@@ -18,5 +18,7 @@ data class CryptoCurrencyInfoDto(
     @SerialName("marketCapUsd")
     val marketCapUsd: String? = null,
     @SerialName("tradable")
-    val tradable: Boolean? = null
+    val tradable: Boolean? = null,
+    @SerialName("rank")
+    val rank: Int? = null
 )
