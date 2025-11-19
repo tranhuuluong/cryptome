@@ -5,3 +5,7 @@ plugins {
 android {
     namespace = "com.luongtran.cryptome.core.ui"
 }
+
+dependencies {
+    testImplementation(libs.robolectric)
+}
