@@ -1,0 +1,10 @@
+[
+  {
+    "id": "usd",
+    "name": "US Dollar",
+    "symbol": "$",
+    "code": "USD",
+    "priceUsd": "1.00",
+    "tradable": true
+  }
+]
