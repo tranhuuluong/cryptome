@@ -22,6 +22,17 @@ interface CryptoCurrencyInfoDao {
     )
     fun getTradable(): Flow<List<CryptoCurrencyInfoEntity>>
 
+    @Query(
+        """
+        SELECT * FROM ${CryptoCurrencyInfoEntity.TABLE_NAME}
+        WHERE ${CryptoCurrencyInfoEntity.COLUMN_NAME} LIKE :query || '%'
+        OR ${CryptoCurrencyInfoEntity.COLUMN_NAME} LIKE '% ' || :query || '%'
+        OR ${CryptoCurrencyInfoEntity.COLUMN_SYMBOL} LIKE :query || '%'
+    """
+    )
+    fun search(query: String): Flow<List<CryptoCurrencyInfoEntity>>
+
+
     @Query("DELETE FROM ${CryptoCurrencyInfoEntity.TABLE_NAME}")
     suspend fun deleteAll()
 }

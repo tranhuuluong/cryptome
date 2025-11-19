@@ -13,8 +13,8 @@ import androidx.navigation.compose.rememberNavController
 import com.luongtran.cryptome.core.designsystem.theme.CryptomeTheme
 import com.luongtran.cryptome.feature.home.ui.navigation.HomeRoute
 import com.luongtran.cryptome.feature.home.ui.navigation.homeScreen
-import com.luongtran.cryptome.feature.search.navigation.navigateToSearch
-import com.luongtran.cryptome.feature.search.navigation.searchScreen
+import com.luongtran.cryptome.feature.search.ui.navigation.navigateToSearch
+import com.luongtran.cryptome.feature.search.ui.navigation.searchScreen
 
 class MainActivity : ComponentActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {

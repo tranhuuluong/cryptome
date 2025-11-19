@@ -2,10 +2,16 @@ package com.luongtran.cryptome.core.database.entity
 
 import androidx.room.ColumnInfo
 import androidx.room.Entity
+import androidx.room.Index
 import androidx.room.PrimaryKey
 
 @Entity(
-    tableName = CryptoCurrencyInfoEntity.TABLE_NAME
+    tableName = CryptoCurrencyInfoEntity.TABLE_NAME,
+    indices = [
+        Index(value = [CryptoCurrencyInfoEntity.COLUMN_SYMBOL]),
+        Index(value = [CryptoCurrencyInfoEntity.COLUMN_NAME]),
+        Index(value = [CryptoCurrencyInfoEntity.COLUMN_TRADABLE]),
+    ]
 )
 data class CryptoCurrencyInfoEntity(
     @PrimaryKey

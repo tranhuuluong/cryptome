@@ -1,6 +1,7 @@
 package com.luongtran.cryptome
 
 import android.app.Application
+import com.luongtran.cryptome.core.common.di.commonModule
 import com.luongtran.cryptome.core.database.di.databaseModule
 import com.luongtran.cryptome.core.network.di.networkModule
 import com.luongtran.cryptome.di.appModule
@@ -15,7 +16,14 @@ class CryptomeApplication : Application() {
 
         startKoin {
             androidContext(this@CryptomeApplication)
-            modules(appModule, homeModule, searchModule, networkModule, databaseModule)
+            modules(
+                appModule,
+                homeModule,
+                searchModule,
+                networkModule,
+                databaseModule,
+                commonModule
+            )
         }
     }
 }

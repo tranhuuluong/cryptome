@@ -2,11 +2,16 @@ package com.luongtran.cryptome.core.database.entity
 
 import androidx.room.ColumnInfo
 import androidx.room.Entity
+import androidx.room.Index
 import androidx.room.PrimaryKey
 
 @Entity(
-    tableName = FiatCurrencyInfoEntity.TABLE_NAME
-
+    tableName = FiatCurrencyInfoEntity.TABLE_NAME,
+    indices = [
+        Index(value = [FiatCurrencyInfoEntity.COLUMN_SYMBOL]),
+        Index(value = [FiatCurrencyInfoEntity.COLUMN_NAME]),
+        Index(value = [FiatCurrencyInfoEntity.COLUMN_TRADABLE]),
+    ]
 )
 data class FiatCurrencyInfoEntity(
     @PrimaryKey

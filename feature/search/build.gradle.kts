@@ -9,9 +9,14 @@ android {
 
 dependencies {
     implementation(project(":core:designsystem"))
+    implementation(project(":core:ui"))
+    implementation(project(":core:common"))
+    implementation(project(":core:domain"))
+    implementation(project(":core:database"))
+    implementation(project(":core:network"))
     implementation(libs.androidx.core.ktx)
     implementation(platform(libs.koin.bom))
-    implementation(libs.bundles.koin)
+    implementation(libs.bundles.koin.android)
     testImplementation(libs.junit)
     androidTestImplementation(libs.androidx.junit)
     androidTestImplementation(libs.androidx.espresso.core)
