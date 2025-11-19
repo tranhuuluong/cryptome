@@ -11,14 +11,13 @@ data class FilterUi(
     companion object {
         fun default() = FilterUi(
             options = FilterOption.entries,
-            selectedOption = FilterOption.All,
+            selectedOption = FilterOption.Crypto,
             showTradable = false,
         )
     }
 }
 
 enum class FilterOption(@param:StringRes val stringRes: Int) {
-    All(R.string.filter_all),
     Crypto(R.string.filter_crypto),
     Fiat(R.string.filter_fiat),
 }

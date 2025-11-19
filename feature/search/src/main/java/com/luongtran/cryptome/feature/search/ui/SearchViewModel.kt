@@ -62,7 +62,7 @@ class SearchViewModel(
 
     companion object {
         private const val SEARCH_QUERY = "searchQuery"
-        private const val SEARCH_DEBOUNCE_DURATION = 200L
+        private const val SEARCH_DEBOUNCE_DURATION = 300L
         private const val RECENT_SEARCHES_LIMIT = 10
     }
 }

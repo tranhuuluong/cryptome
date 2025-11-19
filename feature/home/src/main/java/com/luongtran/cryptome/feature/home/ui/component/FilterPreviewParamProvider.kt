@@ -15,12 +15,12 @@ class FilterPreviewParamProvider : PreviewParameterProvider<FilterUi> {
 internal object FilterPreviewData {
     val filter1 = FilterUi(
         options = FilterOption.entries.toList(),
-        selectedOption = FilterOption.All,
+        selectedOption = FilterOption.Crypto,
         showTradable = false
     )
 
     val filter2 = filter1.copy(
-        selectedOption = FilterOption.Crypto,
+        selectedOption = FilterOption.Fiat,
         showTradable = true
     )
 }

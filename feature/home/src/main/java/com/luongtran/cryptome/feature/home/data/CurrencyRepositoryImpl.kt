@@ -14,7 +14,6 @@ import com.luongtran.cryptome.feature.home.domain.CurrencyRepository
 import kotlinx.coroutines.async
 import kotlinx.coroutines.coroutineScope
 import kotlinx.coroutines.flow.Flow
-import kotlinx.coroutines.flow.combine
 
 class CurrencyRepositoryImpl(
     private val cryptoDao: CryptoCurrencyInfoDao,
@@ -32,7 +31,6 @@ class CurrencyRepositoryImpl(
         val fiatFlow = (if (tradableOnly) fiatDao.getTradable() else fiatDao.getAll())
             .mapItems { entity -> entity.toDomainModel() }
         return when (currencyType) {
-            CurrencyType.All -> combine(cryptoFlow, fiatFlow) { cryptos, fiats -> cryptos + fiats }
             CurrencyType.Crypto -> cryptoFlow
             CurrencyType.Fiat -> fiatFlow
         }

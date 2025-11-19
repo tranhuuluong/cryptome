@@ -1,6 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <string name="filter_all">All</string>
     <string name="filter_crypto">Crypto</string>
     <string name="filter_fiat">Fiat</string>
     <string name="control_panel">Control Panel</string>

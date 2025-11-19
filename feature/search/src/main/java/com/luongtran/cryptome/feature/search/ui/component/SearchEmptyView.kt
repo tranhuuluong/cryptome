@@ -14,10 +14,12 @@ import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.tooling.preview.PreviewLightDark
 import androidx.compose.ui.unit.dp
 import com.luongtran.cryptome.core.designsystem.theme.CryptomeTheme
+import com.luongtran.cryptome.feature.search.R
 
 @Composable
 fun SearchEmptyView(
@@ -38,7 +40,7 @@ fun SearchEmptyView(
             modifier = Modifier.size(64.dp)
         )
         Text(
-            text = "No results found for \"$query\"",
+            text = stringResource(R.string.no_results_found, query),
             textAlign = TextAlign.Center,
             style = MaterialTheme.typography.titleLarge,
         )

@@ -37,10 +37,12 @@ import androidx.compose.ui.input.key.Key
 import androidx.compose.ui.input.key.key
 import androidx.compose.ui.input.key.onKeyEvent
 import androidx.compose.ui.platform.LocalSoftwareKeyboardController
+import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.input.ImeAction
 import androidx.compose.ui.tooling.preview.PreviewLightDark
 import androidx.compose.ui.unit.dp
 import com.luongtran.cryptome.core.designsystem.theme.CryptomeTheme
+import com.luongtran.cryptome.core.ui.R as RUi
 
 @Composable
 fun SearchBar(
@@ -122,7 +124,7 @@ fun SearchBar(
                     innerTextField()
                     if (!hasSearchQuery) {
                         Text(
-                            text = "Search coin",
+                            text = stringResource(RUi.string.search_hint),
                             style = textStyle.copy(
                                 color = textStyle.color.copy(alpha = 0.5f)
                             )

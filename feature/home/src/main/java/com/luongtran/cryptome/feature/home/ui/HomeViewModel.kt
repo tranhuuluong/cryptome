@@ -24,7 +24,6 @@ class HomeViewModel(
 
     val uiState = userInput.flatMapLatest { (selectedFilterOption, showTradable) ->
         val currencyType = when (selectedFilterOption) {
-            FilterOption.All -> CurrencyType.All
             FilterOption.Crypto -> CurrencyType.Crypto
             FilterOption.Fiat -> CurrencyType.Fiat
         }
@@ -65,7 +64,7 @@ class HomeViewModel(
     }
 
     private data class UserInput(
-        val selectedFilterOption: FilterOption = FilterOption.All,
+        val selectedFilterOption: FilterOption = FilterOption.Crypto,
         val showTradable: Boolean = false,
     ) : Serializable
 

@@ -23,6 +23,7 @@ import androidx.compose.runtime.getValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.shadow
+import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.tooling.preview.PreviewLightDark
 import androidx.compose.ui.unit.dp
 import androidx.lifecycle.compose.collectAsStateWithLifecycle
@@ -34,6 +35,7 @@ import com.luongtran.cryptome.feature.home.ui.component.HomeEmptyView
 import com.luongtran.cryptome.feature.home.ui.model.FilterOption
 import com.luongtran.cryptome.feature.home.ui.model.HomeUiState
 import org.koin.androidx.compose.koinViewModel
+import com.luongtran.cryptome.core.ui.R as RUi
 
 @Composable
 fun HomeScreen(
@@ -138,7 +140,7 @@ private fun SearchBar(
             tint = MaterialTheme.colorScheme.onSurfaceVariant,
         )
         Text(
-            text = "Search coin",
+            text = stringResource(RUi.string.search_hint),
             color = MaterialTheme.colorScheme.onSurfaceVariant.copy(alpha = 0.7f),
             style = MaterialTheme.typography.bodyMedium,
         )
