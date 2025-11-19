@@ -2,7 +2,9 @@ package com.luongtran.cryptome.feature.search.data
 
 import com.luongtran.cryptome.core.common.utils.TimeProvider
 import com.luongtran.cryptome.core.common.utils.mapItems
-import com.luongtran.cryptome.core.database.CryptomeDatabase
+import com.luongtran.cryptome.core.database.dao.CryptoCurrencyInfoDao
+import com.luongtran.cryptome.core.database.dao.FiatCurrencyInfoDao
+import com.luongtran.cryptome.core.database.dao.RecentSearchDao
 import com.luongtran.cryptome.core.database.entity.RecentSearchEntity
 import com.luongtran.cryptome.core.database.mapper.toDomainModel
 import com.luongtran.cryptome.core.domain.CurrencyInfo
@@ -11,13 +13,11 @@ import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.combine
 
 class SearchRepositoryImpl(
-    database: CryptomeDatabase,
+    private val cryptoDao: CryptoCurrencyInfoDao,
+    private val fiatDao: FiatCurrencyInfoDao,
+    private val recentSearchDao: RecentSearchDao,
     private val timeProvider: TimeProvider,
 ) : SearchRepository {
-    private val cryptoDao = database.cryptoDao()
-    private val fiatDao = database.fiatDao()
-    private val recentSearchDao = database.recentSearchDao()
-
     override fun search(query: String): Flow<List<CurrencyInfo>> = combine(
         cryptoDao.search(query),
         fiatDao.search(query)

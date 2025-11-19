@@ -18,9 +18,9 @@ sealed interface Result<out T> {
     }
 }
 
-fun <T, R> Result<T>.map(transform: (T) -> R): Result<R> = when (this) {
-    is StateLoading -> StateLoading
-    is StateIdle -> StateIdle
-    is DataStateError -> this
-    is DataStateSuccess -> DataStateSuccess(transform(data))
+fun <T> Result<T>.getOrNull(): T? = when (this) {
+    is DataStateSuccess -> data
+    else -> null
 }
+
+fun <T> Result<List<T>>.getOrEmpty(): List<T> = getOrNull().orEmpty()
