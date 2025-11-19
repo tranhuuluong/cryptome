@@ -12,3 +12,6 @@ kotlin {
         freeCompilerArgs.addAll(AppConfig.commonOptIns)
     }
 }
+dependencies {
+    testImplementation(libs.junit)
+}

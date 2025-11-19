@@ -24,6 +24,9 @@ internal val VersionCatalog.composeUiTestManifest
 internal val VersionCatalog.composeUiTooling
     get() = findLibraryOrThrow("androidx-compose-ui-tooling")
 
+internal val VersionCatalog.junit
+    get() = findLibraryOrThrow("junit")
+
 private fun VersionCatalog.findPluginOrThrow(name: String) =
     findPlugin(name)
         .orElseThrow { NoSuchElementException("Plugin $name not found in version catalog") }
