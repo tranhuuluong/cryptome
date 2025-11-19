@@ -9,4 +9,9 @@ object AppConfig {
     val sourceCompatibility = JavaVersion.VERSION_11
     val targetCompatibility = JavaVersion.VERSION_11
     val jvmTarget = JvmTarget.JVM_11
+    val commonOptIns = listOf(
+        "-Xopt-in=kotlinx.coroutines.ExperimentalCoroutinesApi",
+        "-Xopt-in=kotlinx.coroutines.FlowPreview",
+        "-opt-in=kotlin.time.ExperimentalTime",
+    )
 }

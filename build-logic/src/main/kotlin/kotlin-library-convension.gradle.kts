@@ -9,5 +9,6 @@ java {
 kotlin {
     compilerOptions {
         jvmTarget = AppConfig.jvmTarget
+        freeCompilerArgs.addAll(AppConfig.commonOptIns)
     }
 }
