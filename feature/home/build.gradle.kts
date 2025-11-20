@@ -18,6 +18,9 @@ dependencies {
     implementation(platform(libs.koin.bom))
     implementation(libs.bundles.koin.android)
     testImplementation(libs.junit)
+    testImplementation(libs.robolectric)
+    testImplementation(libs.turbine)
+    testImplementation(libs.kotlin.coroutines.test)
     androidTestImplementation(libs.androidx.junit)
     androidTestImplementation(libs.androidx.espresso.core)
 }
