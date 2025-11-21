@@ -51,7 +51,7 @@ val DarkColorScheme = darkColorScheme(
     onTertiaryContainer = White,
     background = BlueDarkBrand,
     onBackground = White,
-    surface = Color(0xFF112B4A),
+    surface = Color(0xFF111B30),
     onSurface = White,
     surfaceVariant = Color(0xFF0D3C73),
     onSurfaceVariant = Color(0xFF8C9DB9),
@@ -61,8 +61,8 @@ val DarkColorScheme = darkColorScheme(
     onError = White,
     errorContainer = Color(0xFFD32F2F),
     onErrorContainer = White,
-    outline = Color(0xFF576A8C),
-    outlineVariant = Color(0xFF435373)
+    outline = Color(0xFF2A3142),
+    outlineVariant = Color(0xFF222836)
 )
 
 

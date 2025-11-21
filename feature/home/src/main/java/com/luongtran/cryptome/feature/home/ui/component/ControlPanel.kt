@@ -43,9 +43,9 @@ fun ControlPanel(
                 color = MaterialTheme.colorScheme.outline
             )
             .shadow(
-                elevation = 10.dp,
+                elevation = 8.dp,
                 shape = shape,
-                ambientColor = MaterialTheme.colorScheme.secondary,
+                ambientColor = MaterialTheme.colorScheme.secondaryContainer,
                 spotColor = MaterialTheme.colorScheme.secondaryContainer,
             )
             .background(MaterialTheme.colorScheme.surface)
@@ -96,7 +96,9 @@ fun ControlPanel(
 @Composable
 private fun ControlPanelPreview() {
     CryptomeTheme {
-        Surface {
+        Surface(
+            color = MaterialTheme.colorScheme.background
+        ) {
             ControlPanel(
                 modifier = Modifier.padding(16.dp)
             )

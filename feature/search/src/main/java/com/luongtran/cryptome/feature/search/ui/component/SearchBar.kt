@@ -97,9 +97,9 @@ fun SearchBar(
                         shape = shape,
                     )
                     .shadow(
-                        elevation = 10.dp,
+                        elevation = 8.dp,
                         shape = shape,
-                        ambientColor = MaterialTheme.colorScheme.secondary,
+                        ambientColor = MaterialTheme.colorScheme.secondaryContainer,
                         spotColor = MaterialTheme.colorScheme.secondaryContainer,
                     )
                     .background(MaterialTheme.colorScheme.surface)

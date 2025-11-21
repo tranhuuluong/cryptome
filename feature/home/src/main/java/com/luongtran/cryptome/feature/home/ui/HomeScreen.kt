@@ -133,10 +133,10 @@ private fun SearchBar(
                 shape = shape,
             )
             .shadow(
-                elevation = 10.dp,
+                elevation = 8.dp,
                 shape = shape,
-                ambientColor = MaterialTheme.colorScheme.tertiary,
-                spotColor = MaterialTheme.colorScheme.tertiaryContainer,
+                ambientColor = MaterialTheme.colorScheme.secondaryContainer,
+                spotColor = MaterialTheme.colorScheme.secondaryContainer,
             )
             .background(MaterialTheme.colorScheme.surface)
             .clickable(onClick = onClick)
