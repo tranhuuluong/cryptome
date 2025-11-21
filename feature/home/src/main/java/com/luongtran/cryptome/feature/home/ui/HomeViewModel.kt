@@ -4,6 +4,7 @@ import androidx.lifecycle.SavedStateHandle
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.luongtran.cryptome.core.domain.CurrencyType
+import com.luongtran.cryptome.core.ui.utils.NumberFormatter
 import com.luongtran.cryptome.feature.home.domain.CurrencyRepository
 import com.luongtran.cryptome.feature.home.ui.mapper.toHomeUiState
 import com.luongtran.cryptome.feature.home.ui.model.FilterOption
@@ -19,6 +20,7 @@ import java.io.Serializable
 class HomeViewModel(
     private val savedStateHandle: SavedStateHandle,
     private val repository: CurrencyRepository,
+    private val numberFormatter: NumberFormatter,
 ) : ViewModel() {
     private val userInput = savedStateHandle.getStateFlow(USER_INPUT, UserInput())
 
@@ -33,7 +35,7 @@ class HomeViewModel(
                     selectedOption = selectedFilterOption,
                     showTradable = showTradable,
                 )
-                currencies.toHomeUiState(filterUi)
+                currencies.toHomeUiState(filterUi = filterUi, numberFormatter = numberFormatter)
             }
     }
         .stateIn(viewModelScope, SharingStarted.Lazily, HomeUiState.Loading)

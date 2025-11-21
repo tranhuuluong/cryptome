@@ -3,6 +3,7 @@ package com.luongtran.cryptome.feature.search.ui
 import androidx.lifecycle.SavedStateHandle
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
+import com.luongtran.cryptome.core.ui.utils.NumberFormatter
 import com.luongtran.cryptome.feature.search.domain.SearchRepository
 import com.luongtran.cryptome.feature.search.ui.mapper.toPopularSearches
 import com.luongtran.cryptome.feature.search.ui.mapper.toSearchUiState
@@ -19,12 +20,15 @@ import kotlinx.coroutines.launch
 
 class SearchViewModel(
     private val savedStateHandle: SavedStateHandle,
-    private val searchRepository: SearchRepository
+    private val searchRepository: SearchRepository,
+    private val numberFormatter: NumberFormatter,
 ) : ViewModel() {
     val searchQuery = savedStateHandle.getStateFlow(SEARCH_QUERY, "")
 
     private val idleState = combine(
-        searchRepository.getPopularSearches(POPULAR_SEARCHES_LIMIT).map { it.toPopularSearches() },
+        searchRepository.getPopularSearches(POPULAR_SEARCHES_LIMIT).map { currencies ->
+            currencies.toPopularSearches(numberFormatter)
+        },
         searchRepository.getRecentSearches(RECENT_SEARCHES_LIMIT),
     ) { popularSearches, recentSearches ->
         SearchUiState.Idle(popularSearches = popularSearches, recentSearches = recentSearches)
@@ -37,7 +41,10 @@ class SearchViewModel(
                     emit(SearchUiState.Loading)
                     emitAll(
                         searchRepository.search(query).map { currencies ->
-                            currencies.toSearchUiState(query)
+                            currencies.toSearchUiState(
+                                query = query,
+                                numberFormatter = numberFormatter
+                            )
                         }
                     )
                 }.debounce(SEARCH_DEBOUNCE_DURATION)

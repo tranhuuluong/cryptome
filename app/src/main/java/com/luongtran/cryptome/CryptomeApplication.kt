@@ -4,6 +4,7 @@ import android.app.Application
 import com.luongtran.cryptome.core.common.di.commonModule
 import com.luongtran.cryptome.core.database.di.databaseModule
 import com.luongtran.cryptome.core.network.di.networkModule
+import com.luongtran.cryptome.core.ui.di.coreUiModule
 import com.luongtran.cryptome.di.appModule
 import com.luongtran.cryptome.feature.home.di.homeModule
 import com.luongtran.cryptome.feature.search.di.searchModule
@@ -22,7 +23,8 @@ class CryptomeApplication : Application() {
                 searchModule,
                 networkModule,
                 databaseModule,
-                commonModule
+                commonModule,
+                coreUiModule
             )
         }
     }

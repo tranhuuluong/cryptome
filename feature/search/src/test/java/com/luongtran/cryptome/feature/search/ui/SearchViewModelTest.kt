@@ -3,6 +3,8 @@ package com.luongtran.cryptome.feature.search.ui
 import androidx.lifecycle.SavedStateHandle
 import app.cash.turbine.test
 import com.luongtran.cryptome.core.domain.CurrencyInfo
+import com.luongtran.cryptome.core.ui.utils.DefaultNumberFormatter
+import com.luongtran.cryptome.core.ui.utils.NumberFormatter
 import com.luongtran.cryptome.feature.search.domain.SearchRepository
 import com.luongtran.cryptome.feature.search.ui.model.SearchUiState
 import kotlinx.coroutines.Dispatchers
@@ -18,23 +20,31 @@ import org.junit.Assert.assertEquals
 import org.junit.Assert.assertTrue
 import org.junit.Before
 import org.junit.Test
-import org.junit.runner.RunWith
-import org.robolectric.RobolectricTestRunner
-import org.robolectric.annotation.Config
 import java.math.BigDecimal
+import java.text.NumberFormat
+import java.util.Locale
 
-@RunWith(RobolectricTestRunner::class)
-@Config(sdk = [34])
 class SearchViewModelTest {
     private val testDispatcher = StandardTestDispatcher()
     private lateinit var repository: FakeSearchRepository
     private lateinit var viewModel: SearchViewModel
 
+    private val numberFormatter: NumberFormatter = DefaultNumberFormatter(
+        priceFormatter = NumberFormat.getCurrencyInstance(Locale.US).apply {
+            minimumFractionDigits = 2
+            maximumFractionDigits = 2
+        },
+        percentFormatter = NumberFormat.getInstance(Locale.US).apply {
+            minimumFractionDigits = 2
+            maximumFractionDigits = 2
+        },
+    )
+
     @Before
     fun setUp() {
         Dispatchers.setMain(testDispatcher)
         repository = FakeSearchRepository()
-        viewModel = SearchViewModel(SavedStateHandle(), repository)
+        viewModel = SearchViewModel(SavedStateHandle(), repository, numberFormatter)
     }
 
     @After

@@ -1,6 +1,8 @@
 package com.luongtran.cryptome.feature.home.ui.mapper
 
 import com.luongtran.cryptome.core.domain.CurrencyInfo
+import com.luongtran.cryptome.core.ui.utils.DefaultNumberFormatter
+import com.luongtran.cryptome.core.ui.utils.NumberFormatter
 import com.luongtran.cryptome.feature.home.ui.model.CurrencyUi
 import com.luongtran.cryptome.feature.home.ui.model.FilterUi
 import com.luongtran.cryptome.feature.home.ui.model.HomeUiState
@@ -8,19 +10,26 @@ import org.junit.Assert.assertEquals
 import org.junit.Assert.assertFalse
 import org.junit.Assert.assertTrue
 import org.junit.Test
-import org.junit.runner.RunWith
-import org.robolectric.RobolectricTestRunner
-import org.robolectric.annotation.Config
 import java.math.BigDecimal
+import java.text.NumberFormat
+import java.util.Locale
 
-@RunWith(RobolectricTestRunner::class)
-@Config(sdk = [34])
 class HomeUiStateMapperTest {
     private val filterUi = FilterUi.default()
+    private val numberFormatter: NumberFormatter = DefaultNumberFormatter(
+        priceFormatter = NumberFormat.getCurrencyInstance(Locale.US).apply {
+            minimumFractionDigits = 2
+            maximumFractionDigits = 2
+        },
+        percentFormatter = NumberFormat.getInstance(Locale.US).apply {
+            minimumFractionDigits = 2
+            maximumFractionDigits = 2
+        },
+    )
 
     @Test
     fun emptyList_mapsToEmptyState() {
-        val result = emptyList<CurrencyInfo>().toHomeUiState(filterUi)
+        val result = emptyList<CurrencyInfo>().toHomeUiState(filterUi, numberFormatter)
         assertTrue(result is HomeUiState.Empty)
         result as HomeUiState.Empty
         assertEquals(filterUi.selectedOption, result.filterUi.selectedOption)
@@ -40,7 +49,7 @@ class HomeUiStateMapperTest {
                 tradable = true,
             )
         )
-        val result = list.toHomeUiState(filterUi) as HomeUiState.Success
+        val result = list.toHomeUiState(filterUi, numberFormatter) as HomeUiState.Success
         assertEquals(1, result.currencies.size)
         val ui = result.currencies.first() as CurrencyUi.Crypto
         assertEquals("btc", ui.id)
@@ -63,7 +72,7 @@ class HomeUiStateMapperTest {
                 tradable = true,
             )
         )
-        val result = list.toHomeUiState(filterUi) as HomeUiState.Success
+        val result = list.toHomeUiState(filterUi, numberFormatter) as HomeUiState.Success
         assertEquals(1, result.currencies.size)
         val ui = result.currencies.first() as CurrencyUi.Fiat
         assertEquals("usd", ui.id)
@@ -96,7 +105,7 @@ class HomeUiStateMapperTest {
                 tradable = false,
             )
         )
-        val result = list.toHomeUiState(filterUi) as HomeUiState.Success
+        val result = list.toHomeUiState(filterUi, numberFormatter) as HomeUiState.Success
         assertEquals(2, result.currencies.size)
         val btc = result.currencies.first { it.id == "btc" } as CurrencyUi.Crypto
         val usd = result.currencies.first { it.id == "usd" } as CurrencyUi.Fiat

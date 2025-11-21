@@ -4,6 +4,8 @@ import androidx.lifecycle.SavedStateHandle
 import app.cash.turbine.test
 import com.luongtran.cryptome.core.domain.CurrencyInfo
 import com.luongtran.cryptome.core.domain.CurrencyType
+import com.luongtran.cryptome.core.ui.utils.DefaultNumberFormatter
+import com.luongtran.cryptome.core.ui.utils.NumberFormatter
 import com.luongtran.cryptome.feature.home.domain.CurrencyRepository
 import com.luongtran.cryptome.feature.home.ui.model.FilterOption
 import com.luongtran.cryptome.feature.home.ui.model.HomeUiState
@@ -20,24 +22,32 @@ import org.junit.Assert.assertEquals
 import org.junit.Assert.assertTrue
 import org.junit.Before
 import org.junit.Test
-import org.junit.runner.RunWith
-import org.robolectric.RobolectricTestRunner
-import org.robolectric.annotation.Config
 import java.math.BigDecimal
+import java.text.NumberFormat
+import java.util.Locale
 
-@RunWith(RobolectricTestRunner::class)
-@Config(sdk = [34])
 class HomeViewModelTest {
     private val testDispatcher = StandardTestDispatcher()
 
     private lateinit var repository: FakeCurrencyRepository
     private lateinit var viewModel: HomeViewModel
 
+    private val numberFormatter: NumberFormatter = DefaultNumberFormatter(
+        priceFormatter = NumberFormat.getCurrencyInstance(Locale.US).apply {
+            minimumFractionDigits = 2
+            maximumFractionDigits = 2
+        },
+        percentFormatter = NumberFormat.getInstance(Locale.US).apply {
+            minimumFractionDigits = 2
+            maximumFractionDigits = 2
+        },
+    )
+
     @Before
     fun setUp() {
         Dispatchers.setMain(testDispatcher)
         repository = FakeCurrencyRepository()
-        viewModel = HomeViewModel(SavedStateHandle(), repository)
+        viewModel = HomeViewModel(SavedStateHandle(), repository, numberFormatter)
     }
 
     @After
