@@ -8,8 +8,8 @@ import com.luongtran.cryptome.feature.search.ui.model.PopularSearchUi
 import com.luongtran.cryptome.feature.search.ui.model.SearchCurrencyUi
 import com.luongtran.cryptome.feature.search.ui.model.SearchUiState
 
-fun List<CurrencyInfo>.toSearchUiState() = when {
-    isEmpty() -> SearchUiState.Empty
+fun List<CurrencyInfo>.toSearchUiState(query: String) = when {
+    isEmpty() -> SearchUiState.Empty(query)
     else -> SearchUiState.Success(
         currencies = map { it.toUiModel() }
     )

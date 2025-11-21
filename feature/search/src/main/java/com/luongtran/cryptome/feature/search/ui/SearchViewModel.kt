@@ -37,7 +37,7 @@ class SearchViewModel(
                     emit(SearchUiState.Loading)
                     emitAll(
                         searchRepository.search(query).map { currencies ->
-                            currencies.toSearchUiState()
+                            currencies.toSearchUiState(query)
                         }
                     )
                 }.debounce(SEARCH_DEBOUNCE_DURATION)

@@ -15,8 +15,8 @@ import java.math.BigDecimal
 class SearchUiMapperTest {
     @Test
     fun emptyList_mapsToEmptyState() {
-        val result = emptyList<CurrencyInfo>().toSearchUiState()
-        assertTrue(result is SearchUiState.Empty)
+        val result = emptyList<CurrencyInfo>().toSearchUiState("btc") as SearchUiState.Empty
+        assertEquals("btc", result.searchQuery)
     }
 
     @Test
@@ -31,7 +31,7 @@ class SearchUiMapperTest {
             rank = 1,
             tradable = true,
         )
-        val result = listOf(crypto).toSearchUiState() as SearchUiState.Success
+        val result = listOf(crypto).toSearchUiState("") as SearchUiState.Success
         val ui = result.currencies.first()
         assertEquals("$1,000.12", ui.priceUsd.formatted)
     }
@@ -46,7 +46,7 @@ class SearchUiMapperTest {
             priceUsd = BigDecimal("1.00"),
             tradable = true,
         )
-        val result = listOf(fiat).toSearchUiState() as SearchUiState.Success
+        val result = listOf(fiat).toSearchUiState("") as SearchUiState.Success
         val ui = result.currencies.first()
         assertEquals("$1.00", ui.priceUsd.formatted)
     }

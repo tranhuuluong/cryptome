@@ -2,7 +2,7 @@ package com.luongtran.cryptome.feature.search.ui.model
 
 interface SearchUiState {
     object Loading : SearchUiState
-    object Empty : SearchUiState
+    data class Empty(val searchQuery: String) : SearchUiState
 
     data class Idle(
         val popularSearches: List<PopularSearchUi>,

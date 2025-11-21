@@ -113,7 +113,7 @@ private fun SearchScreen(
             }
 
             SearchUiState.Loading -> CircularProgressIndicator()
-            SearchUiState.Empty -> SearchEmptyView(query = searchQuery)
+            is SearchUiState.Empty -> SearchEmptyView(query = uiState.searchQuery)
             is SearchUiState.Success -> SearchItems(
                 contentPadding = PaddingValues(16.dp),
                 items = uiState.currencies
