@@ -117,6 +117,7 @@ class HomeViewModelTest {
                 priceUsd = BigDecimal(1000),
                 changePercent24Hr = BigDecimal(2.0),
                 marketCapUsd = BigDecimal(1000000),
+                rank = 1,
                 tradable = true,
             ),
             CurrencyInfo.Crypto(
@@ -126,6 +127,7 @@ class HomeViewModelTest {
                 priceUsd = BigDecimal(0.1),
                 changePercent24Hr = BigDecimal(-1.0),
                 marketCapUsd = BigDecimal(1000),
+                rank = 2,
                 tradable = false,
             )
         )

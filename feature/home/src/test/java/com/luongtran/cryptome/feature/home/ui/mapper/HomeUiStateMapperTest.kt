@@ -37,6 +37,7 @@ class HomeUiStateMapperTest {
                 priceUsd = BigDecimal("1000.12"),
                 changePercent24Hr = BigDecimal("2.50"),
                 marketCapUsd = BigDecimal("10000"),
+                rank = 1,
                 tradable = true,
             )
         )
@@ -84,6 +85,7 @@ class HomeUiStateMapperTest {
                 priceUsd = BigDecimal("1000"),
                 changePercent24Hr = BigDecimal("2.00"),
                 marketCapUsd = BigDecimal("10000"),
+                rank = 1,
                 tradable = true,
             ),
             CurrencyInfo.Fiat(
