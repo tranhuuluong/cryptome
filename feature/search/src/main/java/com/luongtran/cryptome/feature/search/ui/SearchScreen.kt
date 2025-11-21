@@ -3,8 +3,11 @@ package com.luongtran.cryptome.feature.search.ui
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.PaddingValues
 import androidx.compose.foundation.layout.Row
+import androidx.compose.foundation.layout.WindowInsets
+import androidx.compose.foundation.layout.asPaddingValues
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
+import androidx.compose.foundation.layout.navigationBars
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.lazy.items
@@ -20,8 +23,10 @@ import androidx.compose.runtime.Composable
 import androidx.compose.runtime.getValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.platform.LocalFocusManager
+import androidx.compose.ui.platform.LocalSoftwareKeyboardController
 import androidx.compose.ui.res.stringResource
-import androidx.compose.ui.tooling.preview.Preview
+import androidx.compose.ui.tooling.preview.PreviewLightDark
 import androidx.compose.ui.unit.dp
 import androidx.lifecycle.compose.collectAsStateWithLifecycle
 import com.luongtran.cryptome.core.designsystem.theme.CryptomeTheme
@@ -68,6 +73,16 @@ private fun SearchScreen(
     onSearchTriggered: (String) -> Unit = {},
     onClearRecentSearchesClick: () -> Unit = {},
 ) {
+    val focusManager = LocalFocusManager.current
+    val keyboardController = LocalSoftwareKeyboardController.current
+    val onSearchExplicitlyTriggered: (String) -> Unit = {
+        focusManager.clearFocus()
+        keyboardController?.hide()
+        onSearchTriggered(it)
+    }
+    val navigationBarPadding = WindowInsets.navigationBars
+        .asPaddingValues()
+        .calculateBottomPadding()
     Column(
         modifier = modifier.fillMaxSize(),
         horizontalAlignment = Alignment.CenterHorizontally,
@@ -76,8 +91,9 @@ private fun SearchScreen(
             modifier = Modifier
                 .fillMaxWidth()
                 .padding(
-                    top = 16.dp,
-                    bottom = 16.dp,
+                    top = 12.dp,
+                    bottom = 12.dp,
+                    start = 4.dp,
                     end = 16.dp
                 ),
             verticalAlignment = Alignment.CenterVertically
@@ -92,12 +108,16 @@ private fun SearchScreen(
                 modifier = Modifier.weight(1f),
                 searchQuery = searchQuery,
                 onSearchQueryChanged = onSearchQueryChanged,
-                onSearchTriggered = onSearchTriggered,
+                onSearchTriggered = onSearchExplicitlyTriggered,
             )
         }
         when (uiState) {
             is SearchUiState.Idle -> LazyColumn(
-                contentPadding = PaddingValues(horizontal = 16.dp),
+                contentPadding = PaddingValues(
+                    start = 16.dp,
+                    end = 16.dp,
+                    bottom = navigationBarPadding,
+                ),
             ) {
                 val recentSearches = uiState.recentSearches
                 if (recentSearches.isNotEmpty()) {
@@ -105,7 +125,7 @@ private fun SearchScreen(
                         RecentSearches(
                             modifier = Modifier.animateItem(),
                             recentSearches = recentSearches,
-                            onRecentSearchClick = onSearchTriggered,
+                            onRecentSearchClick = onSearchExplicitlyTriggered,
                             onClearRecentSearchesClick = onClearRecentSearchesClick,
                         )
                     }
@@ -138,7 +158,12 @@ private fun SearchScreen(
             SearchUiState.Loading -> CircularProgressIndicator()
             is SearchUiState.Empty -> SearchEmptyView(query = uiState.searchQuery)
             is SearchUiState.Success -> SearchItems(
-                contentPadding = PaddingValues(16.dp),
+                contentPadding = PaddingValues(
+                    start = 16.dp,
+                    end = 16.dp,
+                    top = 16.dp,
+                    bottom = navigationBarPadding,
+                ),
                 items = uiState.currencies,
                 searchQuery = searchQuery,
             )
@@ -146,11 +171,13 @@ private fun SearchScreen(
     }
 }
 
-@Preview
+@PreviewLightDark
 @Composable
 private fun SearchScreenPreview() {
     CryptomeTheme {
-        Surface {
+        Surface(
+            color = MaterialTheme.colorScheme.background,
+        ) {
             SearchScreen(
                 searchQuery = "",
                 uiState = SearchUiState.Idle(

@@ -4,6 +4,7 @@ import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material3.FilterChip
+import androidx.compose.material3.FilterChipDefaults
 import androidx.compose.material3.LocalMinimumInteractiveComponentSize
 import androidx.compose.material3.SuggestionChip
 import androidx.compose.material3.Surface
@@ -16,6 +17,7 @@ import androidx.compose.ui.graphics.Shape
 import androidx.compose.ui.tooling.preview.PreviewLightDark
 import androidx.compose.ui.unit.dp
 import com.luongtran.cryptome.core.designsystem.theme.CryptomeTheme
+import com.luongtran.cryptome.core.designsystem.theme.White
 
 @Composable
 fun CryptomeFilterChip(
@@ -31,6 +33,9 @@ fun CryptomeFilterChip(
             selected = selected,
             onClick = { onSelectedChange(!selected) },
             shape = shape,
+            colors = FilterChipDefaults.filterChipColors(
+                selectedLabelColor = White,
+            ),
             label = {
                 Text(label)
             },

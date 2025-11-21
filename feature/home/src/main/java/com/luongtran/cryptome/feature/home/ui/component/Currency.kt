@@ -73,29 +73,29 @@ private fun CryptoCurrencyItem(
         horizontalArrangement = Arrangement.spacedBy(12.dp)
     ) {
         val changePercent24Hr = uiModel.changePercent24Hr
-        CurrencyIcon(
-            modifier = Modifier.weight(1f),
-            iconRes = uiModel.iconRes,
-        )
-        CurrencyNameAndCode(
-            modifier = Modifier.weight(2f),
-            name = uiModel.name,
-            code = uiModel.symbol,
-            tradable = uiModel.tradable,
-        )
-        FakeChart(
-            modifier = Modifier
-                .weight(2f)
-                .height(32.dp),
-            lineColor = getStatusColor(changePercent24Hr.value)
-        )
-        Column(
-            modifier = Modifier.weight(2f),
-            horizontalAlignment = Alignment.End,
-            verticalArrangement = Arrangement.spacedBy(4.dp),
-        ) {
-            CurrencyPrice(formattedPrice = uiModel.price.formatted)
-            ChangePercent(changePercent = changePercent24Hr)
+        CurrencyIcon(iconRes = uiModel.iconRes)
+
+        Row {
+            CurrencyNameAndCode(
+                modifier = Modifier.weight(1f),
+                name = uiModel.name,
+                code = uiModel.symbol,
+                tradable = uiModel.tradable,
+            )
+            FakeChart(
+                modifier = Modifier
+                    .weight(1f)
+                    .height(32.dp),
+                lineColor = getStatusColor(changePercent24Hr.value)
+            )
+            Column(
+                modifier = Modifier.weight(1f),
+                horizontalAlignment = Alignment.End,
+                verticalArrangement = Arrangement.spacedBy(4.dp),
+            ) {
+                CurrencyPrice(formattedPrice = uiModel.price.formatted)
+                ChangePercent(changePercent = changePercent24Hr)
+            }
         }
     }
 }

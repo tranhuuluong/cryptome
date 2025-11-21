@@ -7,8 +7,11 @@ import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.PaddingValues
 import androidx.compose.foundation.layout.Row
+import androidx.compose.foundation.layout.WindowInsets
+import androidx.compose.foundation.layout.asPaddingValues
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
+import androidx.compose.foundation.layout.navigationBars
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material.icons.Icons
@@ -70,6 +73,9 @@ private fun HomeScreen(
         verticalArrangement = Arrangement.spacedBy(8.dp),
         horizontalAlignment = Alignment.CenterHorizontally,
     ) {
+        val navigationBarPadding = WindowInsets.navigationBars
+            .asPaddingValues()
+            .calculateBottomPadding()
         Column(
             modifier = Modifier.padding(16.dp),
             verticalArrangement = Arrangement.spacedBy(8.dp)
@@ -101,7 +107,11 @@ private fun HomeScreen(
                 )
                 CurrencyList(
                     currencies = uiState.currencies,
-                    contentPadding = PaddingValues(horizontal = 16.dp)
+                    contentPadding = PaddingValues(
+                        start = 16.dp,
+                        end = 16.dp,
+                        bottom = navigationBarPadding,
+                    )
                 )
             }
         }
@@ -151,7 +161,9 @@ private fun SearchBar(
 @Composable
 private fun HomeScreenPreview() {
     CryptomeTheme {
-        Surface {
+        Surface(
+            color = MaterialTheme.colorScheme.background
+        ) {
             HomeScreen(uiState = HomeUiState.Loading)
         }
     }

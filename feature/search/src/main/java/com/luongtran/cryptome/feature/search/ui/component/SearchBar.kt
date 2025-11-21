@@ -36,7 +36,6 @@ import androidx.compose.ui.graphics.SolidColor
 import androidx.compose.ui.input.key.Key
 import androidx.compose.ui.input.key.key
 import androidx.compose.ui.input.key.onKeyEvent
-import androidx.compose.ui.platform.LocalSoftwareKeyboardController
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.input.ImeAction
 import androidx.compose.ui.tooling.preview.PreviewLightDark
@@ -52,11 +51,6 @@ fun SearchBar(
     onSearchTriggered: (String) -> Unit = {},
 ) {
     val focusRequester = remember { FocusRequester() }
-    val keyboardController = LocalSoftwareKeyboardController.current
-    val onSearchExplicitlyTriggered = {
-        keyboardController?.hide()
-        onSearchTriggered(searchQuery)
-    }
     val textStyle = MaterialTheme.typography.bodyMedium.copy(
         color = MaterialTheme.colorScheme.onSurface,
     )
@@ -69,7 +63,7 @@ fun SearchBar(
             .onKeyEvent {
                 if (it.key == Key.Enter) {
                     if (searchQuery.isBlank()) return@onKeyEvent false
-                    onSearchExplicitlyTriggered()
+                    onSearchTriggered(searchQuery)
                     true
                 } else {
                     false
@@ -83,7 +77,7 @@ fun SearchBar(
         keyboardActions = KeyboardActions(
             onSearch = {
                 if (searchQuery.isBlank()) return@KeyboardActions
-                onSearchExplicitlyTriggered()
+                onSearchTriggered(searchQuery)
             },
         ),
         value = searchQuery,
@@ -105,8 +99,8 @@ fun SearchBar(
                     .shadow(
                         elevation = 10.dp,
                         shape = shape,
-                        ambientColor = MaterialTheme.colorScheme.tertiary,
-                        spotColor = MaterialTheme.colorScheme.tertiaryContainer,
+                        ambientColor = MaterialTheme.colorScheme.secondary,
+                        spotColor = MaterialTheme.colorScheme.secondaryContainer,
                     )
                     .background(MaterialTheme.colorScheme.surface)
                     .padding(vertical = 8.dp, horizontal = 12.dp),
@@ -146,7 +140,7 @@ fun SearchBar(
                             )
                             .padding(4.dp)
                             .clip(CircleShape)
-                            .background(MaterialTheme.colorScheme.onSurfaceVariant)
+                            .background(MaterialTheme.colorScheme.outlineVariant)
                             .padding(4.dp),
                         imageVector = Icons.Outlined.Clear,
                         contentDescription = "Clear search",
@@ -167,7 +161,7 @@ fun SearchBarPreview() {
     CryptomeTheme {
         Surface {
             SearchBar(
-                searchQuery = "",
+                searchQuery = "a",
             )
         }
     }

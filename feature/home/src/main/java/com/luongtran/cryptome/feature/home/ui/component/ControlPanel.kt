@@ -40,13 +40,13 @@ fun ControlPanel(
             .border(
                 width = 1.dp,
                 shape = shape,
-                color = MaterialTheme.colorScheme.outlineVariant
+                color = MaterialTheme.colorScheme.outline
             )
             .shadow(
                 elevation = 10.dp,
                 shape = shape,
-                ambientColor = MaterialTheme.colorScheme.tertiary,
-                spotColor = MaterialTheme.colorScheme.tertiaryContainer,
+                ambientColor = MaterialTheme.colorScheme.secondary,
+                spotColor = MaterialTheme.colorScheme.secondaryContainer,
             )
             .background(MaterialTheme.colorScheme.surface)
             .padding(16.dp),
@@ -72,7 +72,7 @@ fun ControlPanel(
                 onClick = onClearDataClick,
                 colors = ButtonDefaults.buttonColors(
                     containerColor = MaterialTheme.colorScheme.errorContainer,
-                    contentColor = MaterialTheme.colorScheme.onError,
+                    contentColor = MaterialTheme.colorScheme.onErrorContainer,
                 ),
             )
             CryptomeActionButton(
