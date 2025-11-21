@@ -11,6 +11,7 @@ sealed interface CurrencyInfo {
         val changePercent24Hr: BigDecimal,
         val marketCapUsd: BigDecimal,
         val tradable: Boolean,
+        val rank: Int,
     ) : CurrencyInfo
 
     data class Fiat(

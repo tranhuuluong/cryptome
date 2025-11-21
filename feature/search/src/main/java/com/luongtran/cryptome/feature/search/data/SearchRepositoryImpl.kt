@@ -29,6 +29,9 @@ class SearchRepositoryImpl(
     override fun getRecentSearches(limit: Int): Flow<List<String>> =
         recentSearchDao.getMostRecent(limit).mapItems { entity -> entity.query }
 
+    override fun getPopularSearches(limit: Int): Flow<List<CurrencyInfo>> =
+        cryptoDao.getPopular(limit).mapItems { it.toDomainModel() }
+
     override suspend fun saveRecentSearch(query: String) {
         recentSearchDao.upsert(
             RecentSearchEntity(

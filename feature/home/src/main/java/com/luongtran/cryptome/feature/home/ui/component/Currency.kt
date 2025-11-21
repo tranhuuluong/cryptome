@@ -72,12 +72,12 @@ private fun CryptoCurrencyItem(
     ) {
         CurrencyIcon(iconRes = uiModel.iconRes)
         CurrencyNameAndCode(
-            modifier = Modifier.weight(1f),
             name = uiModel.name,
             code = uiModel.symbol,
             tradable = uiModel.tradable,
         )
         Column(
+            modifier = Modifier.weight(1f),
             horizontalAlignment = Alignment.End,
             verticalArrangement = Arrangement.spacedBy(4.dp),
         ) {

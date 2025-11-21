@@ -13,6 +13,7 @@ fun CryptoCurrencyInfoEntity.toDomainModel() = CurrencyInfo.Crypto(
     changePercent24Hr = changePercent24Hr.toBigDecimalOrZero(),
     marketCapUsd = marketCapUsd.toBigDecimalOrZero(),
     tradable = tradable ?: false,
+    rank = rank ?: Int.MIN_VALUE,
 )
 
 fun FiatCurrencyInfoEntity.toDomainModel() = CurrencyInfo.Fiat(

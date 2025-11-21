@@ -18,6 +18,7 @@ class CurrencyInfoMapperTest {
             priceUsd = "50000.5",
             changePercent24Hr = "2.5",
             marketCapUsd = "1000000000",
+            rank = 1,
             tradable = true
         )
         val domain = entity.toDomainModel()
@@ -29,6 +30,7 @@ class CurrencyInfoMapperTest {
                 priceUsd = BigDecimal("50000.5"),
                 changePercent24Hr = BigDecimal("2.5"),
                 marketCapUsd = BigDecimal("1000000000"),
+                rank = 1,
                 tradable = true
             ), domain
         )
@@ -77,6 +79,7 @@ class CurrencyInfoMapperTest {
                 priceUsd = BigDecimal.ZERO,
                 changePercent24Hr = BigDecimal.ZERO,
                 marketCapUsd = BigDecimal.ZERO,
+                rank = Int.MIN_VALUE,
                 tradable = false
             ), domain
         )

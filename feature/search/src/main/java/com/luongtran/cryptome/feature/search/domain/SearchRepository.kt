@@ -8,6 +8,8 @@ interface SearchRepository {
 
     fun getRecentSearches(limit: Int): Flow<List<String>>
 
+    fun getPopularSearches(limit: Int): Flow<List<CurrencyInfo>>
+
     suspend fun saveRecentSearch(query: String)
 
     suspend fun clearRecentSearches()

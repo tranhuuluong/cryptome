@@ -1,8 +1,5 @@
 package com.luongtran.cryptome.feature.search.ui.component
 
-import androidx.compose.animation.AnimatedVisibility
-import androidx.compose.animation.fadeIn
-import androidx.compose.animation.fadeOut
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.FlowRow
@@ -21,11 +18,13 @@ import androidx.compose.runtime.Composable
 import androidx.compose.runtime.CompositionLocalProvider
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.tooling.preview.PreviewLightDark
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.util.fastForEach
 import com.luongtran.cryptome.core.designsystem.component.CryptomeChip
 import com.luongtran.cryptome.core.designsystem.theme.CryptomeTheme
+import com.luongtran.cryptome.feature.search.R
 
 @Composable
 fun RecentSearches(
@@ -34,36 +33,30 @@ fun RecentSearches(
     onRecentSearchClick: (String) -> Unit = {},
     onClearRecentSearchesClick: () -> Unit = {},
 ) {
-    AnimatedVisibility(
-        visible = recentSearches.isNotEmpty(),
-        enter = fadeIn(),
-        exit = fadeOut(),
+    Column(
+        modifier = modifier,
+        verticalArrangement = Arrangement.spacedBy(8.dp),
     ) {
-        Column(
-            modifier = modifier,
+        Row(
+            modifier = Modifier.fillMaxWidth(),
+            horizontalArrangement = Arrangement.SpaceBetween,
+            verticalAlignment = Alignment.CenterVertically,
+        ) {
+            Text(
+                text = stringResource(R.string.recent_searches),
+                style = MaterialTheme.typography.labelLarge,
+            )
+            ClearRecentSearchesButton(onClick = onClearRecentSearchesClick)
+        }
+        FlowRow(
+            horizontalArrangement = Arrangement.spacedBy(8.dp),
             verticalArrangement = Arrangement.spacedBy(8.dp),
         ) {
-            Row(
-                modifier = Modifier.fillMaxWidth(),
-                horizontalArrangement = Arrangement.SpaceBetween,
-                verticalAlignment = Alignment.CenterVertically,
-            ) {
-                Text(
-                    text = "Recent Searches",
-                    style = MaterialTheme.typography.labelLarge,
+            recentSearches.fastForEach { query ->
+                CryptomeChip(
+                    label = query,
+                    onClick = { onRecentSearchClick(query) },
                 )
-                ClearRecentSearchesButton(onClick = onClearRecentSearchesClick)
-            }
-            FlowRow(
-                horizontalArrangement = Arrangement.spacedBy(8.dp),
-                verticalArrangement = Arrangement.spacedBy(8.dp),
-            ) {
-                recentSearches.fastForEach { query ->
-                    CryptomeChip(
-                        label = query,
-                        onClick = { onRecentSearchClick(query) },
-                    )
-                }
             }
         }
     }

@@ -28,9 +28,18 @@ interface CryptoCurrencyInfoDao {
         WHERE ${CryptoCurrencyInfoEntity.COLUMN_NAME} LIKE :query || '%'
         OR ${CryptoCurrencyInfoEntity.COLUMN_NAME} LIKE '% ' || :query || '%'
         OR ${CryptoCurrencyInfoEntity.COLUMN_SYMBOL} LIKE :query || '%'
-    """
+        """
     )
     fun search(query: String): Flow<List<CryptoCurrencyInfoEntity>>
+
+    @Query(
+        """
+        SELECT * FROM ${CryptoCurrencyInfoEntity.TABLE_NAME}
+        ORDER BY ${CryptoCurrencyInfoEntity.COLUMN_RANK} ASC
+        LIMIT :limit
+        """
+    )
+    fun getPopular(limit: Int): Flow<List<CryptoCurrencyInfoEntity>>
 
 
     @Query("DELETE FROM ${CryptoCurrencyInfoEntity.TABLE_NAME}")
