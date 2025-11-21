@@ -7,6 +7,7 @@ import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.PaddingValues
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.fillMaxWidth
+import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.lazy.LazyColumn
@@ -19,6 +20,7 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.text.style.TextAlign
+import androidx.compose.ui.text.style.TextOverflow
 import androidx.compose.ui.tooling.preview.PreviewLightDark
 import androidx.compose.ui.tooling.preview.PreviewParameter
 import androidx.compose.ui.unit.dp
@@ -70,19 +72,30 @@ private fun CryptoCurrencyItem(
         verticalAlignment = Alignment.CenterVertically,
         horizontalArrangement = Arrangement.spacedBy(12.dp)
     ) {
-        CurrencyIcon(iconRes = uiModel.iconRes)
+        val changePercent24Hr = uiModel.changePercent24Hr
+        CurrencyIcon(
+            modifier = Modifier.weight(1f),
+            iconRes = uiModel.iconRes,
+        )
         CurrencyNameAndCode(
+            modifier = Modifier.weight(2f),
             name = uiModel.name,
             code = uiModel.symbol,
             tradable = uiModel.tradable,
         )
+        FakeChart(
+            modifier = Modifier
+                .weight(2f)
+                .height(32.dp),
+            lineColor = getStatusColor(changePercent24Hr.value)
+        )
         Column(
-            modifier = Modifier.weight(1f),
+            modifier = Modifier.weight(2f),
             horizontalAlignment = Alignment.End,
             verticalArrangement = Arrangement.spacedBy(4.dp),
         ) {
             CurrencyPrice(formattedPrice = uiModel.price.formatted)
-            ChangePercent(changePercent = uiModel.changePercent24Hr)
+            ChangePercent(changePercent = changePercent24Hr)
         }
     }
 }
@@ -163,6 +176,8 @@ private fun CurrencyPrice(
         modifier = modifier,
         text = formattedPrice,
         textAlign = TextAlign.End,
+        maxLines = 1,
+        overflow = TextOverflow.Ellipsis,
         style = MaterialTheme.typography.labelLarge,
         color = MaterialTheme.colorScheme.onSurface
     )
@@ -174,14 +189,16 @@ private fun ChangePercent(
     changePercent: DisplayableNumber,
 ) {
     val (changePercent, changePercentFormatted) = changePercent
-    val color = if (changePercent.toDouble() >= 0.0) AccentGreen else AccentRed
     Text(
         modifier = modifier,
         text = changePercentFormatted,
         style = MaterialTheme.typography.labelMedium,
-        color = color
+        color = getStatusColor(changePercent)
     )
 }
+
+private fun getStatusColor(changePercent: Number) =
+    if (changePercent.toDouble() >= 0.0) AccentGreen else AccentRed
 
 @PreviewLightDark
 @Composable
