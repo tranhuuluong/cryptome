@@ -37,12 +37,8 @@ class MainActivity : ComponentActivity() {
                         navController = navController,
                         startDestination = HomeRoute,
                     ) {
-                        homeScreen(
-                            onSearchBarClick = {
-                                navController.navigateToSearch()
-                            },
-                        )
-                        searchScreen()
+                        homeScreen(onSearchBarClick = navController::navigateToSearch)
+                        searchScreen(onBackClick = navController::navigateUp)
                     }
                 }
             }

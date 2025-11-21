@@ -1,8 +1,6 @@
 package com.luongtran.cryptome.feature.home.ui.navigation
 
-import androidx.navigation.NavController
 import androidx.navigation.NavGraphBuilder
-import androidx.navigation.NavOptions
 import androidx.navigation.compose.composable
 import androidx.navigation.compose.navigation
 import com.luongtran.cryptome.feature.home.ui.HomeScreen
@@ -13,10 +11,6 @@ data object HomeRoute
 
 @Serializable
 data object HomeScreen
-
-fun NavController.navigateToHome(
-    navOptions: NavOptions? = null
-) = navigate(route = HomeRoute, navOptions = navOptions)
 
 fun NavGraphBuilder.homeScreen(
     onSearchBarClick: () -> Unit,

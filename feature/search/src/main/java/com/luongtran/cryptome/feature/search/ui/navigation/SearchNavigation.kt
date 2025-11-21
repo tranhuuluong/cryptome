@@ -20,10 +20,14 @@ fun NavController.navigateToSearch(
     navigate(route = SearchRoute, navOptions = navOptions)
 }
 
-fun NavGraphBuilder.searchScreen() {
+fun NavGraphBuilder.searchScreen(
+    onBackClick: () -> Unit,
+) {
     navigation<SearchRoute>(startDestination = SearchScreen) {
         composable<SearchScreen>() {
-            SearchScreen()
+            SearchScreen(
+                onBackClick = onBackClick,
+            )
         }
     }
 }

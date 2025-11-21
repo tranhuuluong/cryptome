@@ -2,12 +2,17 @@ package com.luongtran.cryptome.feature.search.ui
 
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.PaddingValues
+import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.lazy.items
+import androidx.compose.material.icons.Icons
+import androidx.compose.material.icons.automirrored.filled.ArrowBack
 import androidx.compose.material3.CircularProgressIndicator
+import androidx.compose.material3.Icon
+import androidx.compose.material3.IconButton
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Surface
 import androidx.compose.material3.Text
@@ -38,6 +43,7 @@ import com.luongtran.cryptome.core.ui.R as RUi
 fun SearchScreen(
     modifier: Modifier = Modifier,
     viewModel: SearchViewModel = koinViewModel(),
+    onBackClick: () -> Unit = {},
 ) {
     val searchQuery by viewModel.searchQuery.collectAsStateWithLifecycle()
     val uiState by viewModel.uiState.collectAsStateWithLifecycle()
@@ -45,6 +51,7 @@ fun SearchScreen(
         modifier = modifier,
         searchQuery = searchQuery,
         uiState = uiState,
+        onBackClick = onBackClick,
         onSearchQueryChanged = viewModel::onSearchQueryChange,
         onSearchTriggered = viewModel::onSearchTriggered,
         onClearRecentSearchesClick = viewModel::clearRecentSearches,
@@ -56,6 +63,7 @@ private fun SearchScreen(
     modifier: Modifier = Modifier,
     searchQuery: String,
     uiState: SearchUiState,
+    onBackClick: () -> Unit = {},
     onSearchQueryChanged: (String) -> Unit = {},
     onSearchTriggered: (String) -> Unit = {},
     onClearRecentSearchesClick: () -> Unit = {},
@@ -64,14 +72,29 @@ private fun SearchScreen(
         modifier = modifier.fillMaxSize(),
         horizontalAlignment = Alignment.CenterHorizontally,
     ) {
-        SearchBar(
+        Row(
             modifier = Modifier
                 .fillMaxWidth()
-                .padding(16.dp),
-            searchQuery = searchQuery,
-            onSearchQueryChanged = onSearchQueryChanged,
-            onSearchTriggered = onSearchTriggered,
-        )
+                .padding(
+                    top = 16.dp,
+                    bottom = 16.dp,
+                    end = 16.dp
+                ),
+            verticalAlignment = Alignment.CenterVertically
+        ) {
+            IconButton(onClick = onBackClick) {
+                Icon(
+                    imageVector = Icons.AutoMirrored.Default.ArrowBack,
+                    contentDescription = null,
+                )
+            }
+            SearchBar(
+                modifier = Modifier.weight(1f),
+                searchQuery = searchQuery,
+                onSearchQueryChanged = onSearchQueryChanged,
+                onSearchTriggered = onSearchTriggered,
+            )
+        }
         when (uiState) {
             is SearchUiState.Idle -> LazyColumn(
                 contentPadding = PaddingValues(horizontal = 16.dp),
