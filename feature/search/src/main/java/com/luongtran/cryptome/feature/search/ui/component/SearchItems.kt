@@ -16,11 +16,17 @@ import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.res.painterResource
+import androidx.compose.ui.text.SpanStyle
+import androidx.compose.ui.text.TextStyle
+import androidx.compose.ui.text.buildAnnotatedString
 import androidx.compose.ui.text.style.TextAlign
+import androidx.compose.ui.text.withStyle
 import androidx.compose.ui.tooling.preview.PreviewLightDark
 import androidx.compose.ui.unit.dp
 import com.luongtran.cryptome.core.designsystem.theme.CryptomeTheme
+import com.luongtran.cryptome.core.designsystem.theme.SearchHighlightBackground
 import com.luongtran.cryptome.core.ui.model.DisplayableNumber
 import com.luongtran.cryptome.feature.search.ui.model.SearchCurrencyUi
 import java.math.BigDecimal
@@ -29,6 +35,7 @@ import com.luongtran.cryptome.core.ui.R as RUi
 @Composable
 fun SearchItems(
     items: List<SearchCurrencyUi>,
+    searchQuery: String,
     modifier: Modifier = Modifier,
     contentPadding: PaddingValues = PaddingValues(0.dp),
 ) {
@@ -42,6 +49,7 @@ fun SearchItems(
         ) { item ->
             SearchItem(
                 modifier = Modifier.animateItem(),
+                searchQuery = searchQuery,
                 uiModel = item,
             )
         }
@@ -51,6 +59,7 @@ fun SearchItems(
 @Composable
 private fun SearchItem(
     uiModel: SearchCurrencyUi,
+    searchQuery: String,
     modifier: Modifier = Modifier
 ) {
     Row(
@@ -68,15 +77,19 @@ private fun SearchItem(
         Column(
             verticalArrangement = Arrangement.spacedBy(4.dp),
         ) {
-            Text(
+            HighlightableText(
                 text = uiModel.name,
-                style = MaterialTheme.typography.labelLarge,
-                color = MaterialTheme.colorScheme.onSurface
+                highlight = searchQuery,
+                textStyle = MaterialTheme.typography.labelLarge.copy(
+                    color = MaterialTheme.colorScheme.onSurface
+                ),
             )
-            Text(
+            HighlightableText(
                 text = uiModel.code.uppercase(),
-                style = MaterialTheme.typography.labelMedium,
-                color = MaterialTheme.colorScheme.onSurfaceVariant
+                highlight = searchQuery,
+                textStyle = MaterialTheme.typography.labelMedium.copy(
+                    color = MaterialTheme.colorScheme.onSurfaceVariant
+                ),
             )
         }
         Text(
@@ -89,6 +102,33 @@ private fun SearchItem(
     }
 }
 
+@Composable
+private fun HighlightableText(
+    text: String,
+    highlight: String,
+    textStyle: TextStyle,
+    highlightColor: Color = SearchHighlightBackground,
+) {
+    val annotatedString = buildAnnotatedString {
+        val startIndex = text.indexOf(highlight, ignoreCase = true)
+        if (startIndex == -1) {
+            append(text)
+        } else {
+            val endIndex = startIndex + highlight.length
+            append(text.take(startIndex))
+            withStyle(SpanStyle(background = highlightColor)) {
+                append(text.substring(startIndex, endIndex))
+            }
+            append(text.substring(endIndex))
+        }
+    }
+
+    Text(
+        text = annotatedString,
+        style = textStyle,
+    )
+}
+
 @PreviewLightDark
 @Composable
 fun SearchItemsPreview() {
@@ -96,6 +136,7 @@ fun SearchItemsPreview() {
         Surface {
             SearchItems(
                 contentPadding = PaddingValues(16.dp),
+                searchQuery = "",
                 items = listOf(
                     SearchCurrencyUi(
                         id = "BTC",

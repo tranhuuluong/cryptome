@@ -139,7 +139,8 @@ private fun SearchScreen(
             is SearchUiState.Empty -> SearchEmptyView(query = uiState.searchQuery)
             is SearchUiState.Success -> SearchItems(
                 contentPadding = PaddingValues(16.dp),
-                items = uiState.currencies
+                items = uiState.currencies,
+                searchQuery = searchQuery,
             )
         }
     }
