@@ -1,0 +1,38 @@
+{
+  "slug": "bitcoin",
+  "prices": [
+    100,
+    105,
+    103
+  ],
+  "token_id": 1,
+  "circulating_supply": 1000000,
+  "total_supply": 1000000,
+  "max_supply": 1200000,
+  "btc_price": 1,
+  "btc_marketcap": 1000000,
+  "btc_volume_24h": 5000,
+  "btc_volume_30d": 150000,
+  "btc_price_change_24h": 0.02,
+  "usd_price": 100,
+  "usd_marketcap": 100000000,
+  "usd_volume_24h": 2500000,
+  "usd_volume_30d": 80000000,
+  "usd_price_change_24h": 0.01,
+  "usd_price_change_24h_abs": 1,
+  "token_dominance_rate": null,
+  "rank": 1,
+  "app_tradable": true,
+  "exchange_tradable": true,
+  "defi_tradable": true,
+  "update_time": 1700000000,
+  "price_update_time": 1700000000,
+  "app_symbol": "",
+  "all_time": {
+    "high": 150,
+    "high_timestamp": 1600000000,
+    "low": 1,
+    "low_timestamp": 1500000000
+  },
+  "visibility": "public"
+}

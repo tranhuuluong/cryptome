@@ -86,6 +86,9 @@ class CryptomeDatabaseTest {
         assertEquals(1, popular.size)
         assertEquals("btc", popular[0].id)
 
+        val getById = cryptoDao.getById("eth")
+        assertEquals("eth", getById?.id)
+
         cryptoDao.deleteAll()
         assertTrue(cryptoDao.getAll().first().isEmpty())
     }

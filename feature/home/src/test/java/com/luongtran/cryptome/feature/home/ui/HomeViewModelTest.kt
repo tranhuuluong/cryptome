@@ -41,6 +41,7 @@ class HomeViewModelTest {
             minimumFractionDigits = 2
             maximumFractionDigits = 2
         },
+        cryptoAmountFormatter = NumberFormat.getNumberInstance(),
     )
 
     @Before
@@ -124,9 +125,10 @@ class HomeViewModelTest {
                 id = "bitcoin",
                 name = "Bitcoin",
                 symbol = "BTC",
-                priceUsd = BigDecimal(1000),
-                changePercent24Hr = BigDecimal(2.0),
-                marketCapUsd = BigDecimal(1000000),
+                slug = "bitoin",
+                priceUsd = 1000.0,
+                changePercent24Hr = 2.0,
+                marketCapUsd = 1000000.0,
                 rank = 1,
                 tradable = true,
             ),
@@ -134,9 +136,10 @@ class HomeViewModelTest {
                 id = "dogecoin",
                 name = "Dogecoin",
                 symbol = "DOGE",
-                priceUsd = BigDecimal(0.1),
-                changePercent24Hr = BigDecimal(-1.0),
-                marketCapUsd = BigDecimal(1000),
+                slug = "dogecoin",
+                priceUsd = 0.1,
+                changePercent24Hr = -1.0,
+                marketCapUsd = 1000.0,
                 rank = 2,
                 tradable = false,
             )
@@ -148,7 +151,7 @@ class HomeViewModelTest {
                 name = "US Dollar",
                 symbol = "$",
                 code = "USD",
-                priceUsd = BigDecimal(1.0),
+                priceUsd = 1.0,
                 tradable = true,
             ),
             CurrencyInfo.Fiat(
@@ -156,7 +159,7 @@ class HomeViewModelTest {
                 name = "Euro",
                 symbol = "€",
                 code = "EUR",
-                priceUsd = BigDecimal(1.2),
+                priceUsd = 1.2,
                 tradable = false,
             )
         )

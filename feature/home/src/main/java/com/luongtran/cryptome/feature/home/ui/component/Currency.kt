@@ -2,12 +2,16 @@ package com.luongtran.cryptome.feature.home.ui.component
 
 import androidx.annotation.DrawableRes
 import androidx.compose.foundation.Image
+import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.PaddingValues
 import androidx.compose.foundation.layout.Row
+import androidx.compose.foundation.layout.WindowInsets
+import androidx.compose.foundation.layout.asPaddingValues
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
+import androidx.compose.foundation.layout.navigationBars
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.lazy.LazyColumn
@@ -32,14 +36,14 @@ import com.luongtran.cryptome.feature.home.ui.model.CurrencyUi
 
 @Composable
 fun CurrencyList(
+    currencies: List<CurrencyUi>,
     modifier: Modifier = Modifier,
     contentPadding: PaddingValues = PaddingValues(0.dp),
-    currencies: List<CurrencyUi>,
+    onCoinClick: (String, String) -> Unit = { _, _ -> },
 ) {
     LazyColumn(
         modifier = modifier,
-        verticalArrangement = Arrangement.spacedBy(8.dp),
-        contentPadding = contentPadding
+        contentPadding = WindowInsets.navigationBars.asPaddingValues(),
     ) {
         items(
             items = currencies,
@@ -48,11 +52,14 @@ fun CurrencyList(
             when (currency) {
                 is CurrencyUi.Crypto -> CryptoCurrencyItem(
                     modifier = Modifier.animateItem(),
+                    contentPadding = contentPadding,
                     uiModel = currency,
+                    onCoinClick = onCoinClick,
                 )
 
                 is CurrencyUi.Fiat -> FiatCurrencyItem(
                     modifier = Modifier.animateItem(),
+                    contentPadding = contentPadding,
                     uiModel = currency,
                 )
             }
@@ -63,12 +70,15 @@ fun CurrencyList(
 @Composable
 private fun CryptoCurrencyItem(
     uiModel: CurrencyUi.Crypto,
-    modifier: Modifier = Modifier
+    modifier: Modifier = Modifier,
+    contentPadding: PaddingValues = PaddingValues(0.dp),
+    onCoinClick: (String, String) -> Unit = { _, _ -> },
 ) {
     Row(
         modifier = modifier
             .fillMaxWidth()
-            .padding(vertical = 12.dp),
+            .clickable { onCoinClick(uiModel.id, uiModel.name) }
+            .padding(contentPadding),
         verticalAlignment = Alignment.CenterVertically,
         horizontalArrangement = Arrangement.spacedBy(12.dp)
     ) {
@@ -103,12 +113,13 @@ private fun CryptoCurrencyItem(
 @Composable
 private fun FiatCurrencyItem(
     uiModel: CurrencyUi.Fiat,
-    modifier: Modifier = Modifier
+    modifier: Modifier = Modifier,
+    contentPadding: PaddingValues = PaddingValues(0.dp),
 ) {
     Row(
         modifier = modifier
             .fillMaxWidth()
-            .padding(vertical = 12.dp),
+            .padding(contentPadding),
         verticalAlignment = Alignment.CenterVertically,
         horizontalArrangement = Arrangement.spacedBy(12.dp)
     ) {

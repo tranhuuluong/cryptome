@@ -17,6 +17,8 @@ import androidx.compose.ui.Modifier
 import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.rememberNavController
 import com.luongtran.cryptome.core.designsystem.theme.CryptomeTheme
+import com.luongtran.cryptome.feature.coindetail.ui.navigation.coinDetail
+import com.luongtran.cryptome.feature.coindetail.ui.navigation.navigateToCoinDetail
 import com.luongtran.cryptome.feature.home.ui.navigation.HomeRoute
 import com.luongtran.cryptome.feature.home.ui.navigation.homeScreen
 import com.luongtran.cryptome.feature.search.ui.navigation.navigateToSearch
@@ -40,7 +42,12 @@ class MainActivity : ComponentActivity() {
                         navController = navController,
                         startDestination = HomeRoute,
                     ) {
-                        homeScreen(onSearchBarClick = navController::navigateToSearch)
+                        homeScreen(
+                            onSearchBarClick = navController::navigateToSearch,
+                            onCoinClick = navController::navigateToCoinDetail
+                        ) {
+                            coinDetail()
+                        }
                         searchScreen(onBackClick = navController::navigateUp)
                     }
                 }

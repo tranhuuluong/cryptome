@@ -22,6 +22,8 @@ data class CryptoCurrencyInfoEntity(
     val name: String? = null,
     @ColumnInfo(COLUMN_SYMBOL)
     val symbol: String? = null,
+    @ColumnInfo(COLUMN_SLUG)
+    val slug: String? = null,
     @ColumnInfo(COLUMN_PRICE_USD)
     val priceUsd: String? = null,
     @ColumnInfo(COLUMN_CHANGE_PERCENT_24HR)
@@ -38,6 +40,7 @@ data class CryptoCurrencyInfoEntity(
         const val COLUMN_ID = "id"
         const val COLUMN_NAME = "name"
         const val COLUMN_SYMBOL = "symbol"
+        const val COLUMN_SLUG = "slug"
         const val COLUMN_PRICE_USD = "price_usd"
         const val COLUMN_CHANGE_PERCENT_24HR = "change_percent_24hr"
         const val COLUMN_MARKET_CAP_USD = "market_cap_usd"

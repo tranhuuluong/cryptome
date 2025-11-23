@@ -7,11 +7,8 @@ import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.PaddingValues
 import androidx.compose.foundation.layout.Row
-import androidx.compose.foundation.layout.WindowInsets
-import androidx.compose.foundation.layout.asPaddingValues
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
-import androidx.compose.foundation.layout.navigationBars
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material.icons.Icons
@@ -45,6 +42,7 @@ fun HomeScreen(
     modifier: Modifier = Modifier,
     viewModel: HomeViewModel = koinViewModel(),
     onSearchBarClick: () -> Unit,
+    onCoinClick: (String, String) -> Unit,
 ) {
     val uiState by viewModel.uiState.collectAsStateWithLifecycle()
     HomeScreen(
@@ -54,7 +52,8 @@ fun HomeScreen(
         onClearDataClick = viewModel::onClearDataClick,
         onInsertDataClick = viewModel::onInsertDataClick,
         onFilterOptionClick = viewModel::onFilterOptionClick,
-        onTradableClick = viewModel::onTradableCheckedChange
+        onTradableClick = viewModel::onTradableCheckedChange,
+        onCoinClick = onCoinClick,
     )
 }
 
@@ -67,15 +66,13 @@ private fun HomeScreen(
     onInsertDataClick: () -> Unit = {},
     onFilterOptionClick: (FilterOption) -> Unit = {},
     onTradableClick: () -> Unit = {},
+    onCoinClick: (String, String) -> Unit = { _, _ -> },
 ) {
     Column(
         modifier = modifier.fillMaxSize(),
         verticalArrangement = Arrangement.spacedBy(8.dp),
         horizontalAlignment = Alignment.CenterHorizontally,
     ) {
-        val navigationBarPadding = WindowInsets.navigationBars
-            .asPaddingValues()
-            .calculateBottomPadding()
         Column(
             modifier = Modifier.padding(16.dp),
             verticalArrangement = Arrangement.spacedBy(8.dp)
@@ -107,11 +104,8 @@ private fun HomeScreen(
                 )
                 CurrencyList(
                     currencies = uiState.currencies,
-                    contentPadding = PaddingValues(
-                        start = 16.dp,
-                        end = 16.dp,
-                        bottom = navigationBarPadding,
-                    )
+                    contentPadding = PaddingValues(16.dp),
+                    onCoinClick = onCoinClick,
                 )
             }
         }

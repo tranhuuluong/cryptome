@@ -6,6 +6,7 @@ import com.luongtran.cryptome.core.database.di.databaseModule
 import com.luongtran.cryptome.core.network.di.networkModule
 import com.luongtran.cryptome.core.ui.di.coreUiModule
 import com.luongtran.cryptome.di.appModule
+import com.luongtran.cryptome.feature.coindetail.di.coinDetailModule
 import com.luongtran.cryptome.feature.home.di.homeModule
 import com.luongtran.cryptome.feature.search.di.searchModule
 import org.koin.android.ext.koin.androidContext
@@ -21,6 +22,7 @@ class CryptomeApplication : Application() {
                 appModule,
                 homeModule,
                 searchModule,
+                coinDetailModule,
                 networkModule,
                 databaseModule,
                 commonModule,

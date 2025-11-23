@@ -10,6 +10,7 @@ sealed interface CurrencyUi {
         override val id: String,
         val name: String,
         val symbol: String,
+        val slug: String,
         val price: DisplayableNumber,
         val changePercent24Hr: DisplayableNumber,
         val tradable: Boolean,

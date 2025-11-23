@@ -15,6 +15,7 @@ class CurrencyInfoMapperTest {
             id = "btc",
             name = "Bitcoin",
             symbol = "BTC",
+            slug = "bitcoin",
             priceUsd = "50000.5",
             changePercent24Hr = "2.5",
             marketCapUsd = "1000000000",
@@ -27,9 +28,10 @@ class CurrencyInfoMapperTest {
                 id = "btc",
                 name = "Bitcoin",
                 symbol = "BTC",
-                priceUsd = BigDecimal("50000.5"),
-                changePercent24Hr = BigDecimal("2.5"),
-                marketCapUsd = BigDecimal("1000000000"),
+                slug = "bitcoin",
+                priceUsd = 50000.5,
+                changePercent24Hr = 2.5,
+                marketCapUsd = 1000000000.0,
                 rank = 1,
                 tradable = true
             ), domain
@@ -53,7 +55,7 @@ class CurrencyInfoMapperTest {
                 name = "US Dollar",
                 symbol = "$",
                 code = "USD",
-                priceUsd = BigDecimal("1.0"),
+                priceUsd = 1.0,
                 tradable = false
             ), domain
         )
@@ -76,9 +78,10 @@ class CurrencyInfoMapperTest {
                 id = "eth",
                 name = "",
                 symbol = "",
-                priceUsd = BigDecimal.ZERO,
-                changePercent24Hr = BigDecimal.ZERO,
-                marketCapUsd = BigDecimal.ZERO,
+                slug = "",
+                priceUsd = Double.NaN,
+                changePercent24Hr = Double.NaN,
+                marketCapUsd = Double.NaN,
                 rank = Int.MIN_VALUE,
                 tradable = false
             ), domain
@@ -102,7 +105,7 @@ class CurrencyInfoMapperTest {
                 name = "",
                 symbol = "",
                 code = "",
-                priceUsd = BigDecimal.ZERO,
+                priceUsd = Double.NaN,
                 tradable = false
             ), domain
         )

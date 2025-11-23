@@ -25,6 +25,7 @@ class HomeUiStateMapperTest {
             minimumFractionDigits = 2
             maximumFractionDigits = 2
         },
+        cryptoAmountFormatter = NumberFormat.getNumberInstance()
     )
 
     @Test
@@ -42,9 +43,10 @@ class HomeUiStateMapperTest {
                 id = "btc",
                 name = "Bitcoin",
                 symbol = "BTC",
-                priceUsd = BigDecimal("1000.12"),
-                changePercent24Hr = BigDecimal("2.50"),
-                marketCapUsd = BigDecimal("10000"),
+                slug = "bitcoin",
+                priceUsd = 1000.12,
+                changePercent24Hr = 2.50,
+                marketCapUsd = 10000.0,
                 rank = 1,
                 tradable = true,
             )
@@ -55,6 +57,7 @@ class HomeUiStateMapperTest {
         assertEquals("btc", ui.id)
         assertEquals("Bitcoin", ui.name)
         assertEquals("BTC", ui.symbol)
+        assertEquals("bitcoin", ui.slug)
         assertEquals("$1,000.12", ui.price.formatted)
         assertEquals("+2.50%", ui.changePercent24Hr.formatted)
         assertTrue(ui.tradable)
@@ -68,7 +71,7 @@ class HomeUiStateMapperTest {
                 name = "US Dollar",
                 symbol = "$",
                 code = "USD",
-                priceUsd = BigDecimal("1.00"),
+                priceUsd = 1.00,
                 tradable = true,
             )
         )
@@ -90,9 +93,10 @@ class HomeUiStateMapperTest {
                 id = "btc",
                 name = "Bitcoin",
                 symbol = "BTC",
-                priceUsd = BigDecimal("1000"),
-                changePercent24Hr = BigDecimal("2.00"),
-                marketCapUsd = BigDecimal("10000"),
+                slug = "bitcoin",
+                priceUsd = 1000.0,
+                changePercent24Hr = 2.00,
+                marketCapUsd = 10000.0,
                 rank = 1,
                 tradable = true,
             ),
@@ -101,7 +105,7 @@ class HomeUiStateMapperTest {
                 name = "US Dollar",
                 symbol = "$",
                 code = "USD",
-                priceUsd = BigDecimal("1.00"),
+                priceUsd = 1.00,
                 tradable = false,
             )
         )

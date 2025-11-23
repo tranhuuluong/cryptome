@@ -17,6 +17,7 @@ internal object CurrencyListPreviewData {
             id = "BTC",
             name = "Bitcoin",
             symbol = "BTC",
+            slug = "",
             price = DisplayableNumber(
                 value = BigDecimal(96046.09),
                 formatted = "$96046.09"
@@ -32,6 +33,7 @@ internal object CurrencyListPreviewData {
             id = "ETH",
             name = "Ethereum",
             symbol = "ETH",
+            slug = "",
             price = DisplayableNumber(
                 value = BigDecimal(3168.85),
                 formatted = "$3168.85"
@@ -47,6 +49,7 @@ internal object CurrencyListPreviewData {
             id = "USDT",
             name = "Tether",
             symbol = "USDT",
+            slug = "",
             price = DisplayableNumber(
                 value = BigDecimal(1.00),
                 formatted = "$1.00"
@@ -62,6 +65,7 @@ internal object CurrencyListPreviewData {
             id = "BNB",
             name = "BNB",
             symbol = "BNB",
+            slug = "",
             price = DisplayableNumber(
                 value = BigDecimal(582.14),
                 formatted = "$582.14"
@@ -77,6 +81,7 @@ internal object CurrencyListPreviewData {
             id = "SOL",
             name = "Solana",
             symbol = "SOL",
+            slug = "",
             price = DisplayableNumber(
                 value = BigDecimal(162.50),
                 formatted = "$162.50"
@@ -92,6 +97,7 @@ internal object CurrencyListPreviewData {
             id = "XRP",
             name = "XRP",
             symbol = "XRP",
+            slug = "",
             price = DisplayableNumber(
                 value = BigDecimal(0.52),
                 formatted = "$0.52"
@@ -107,6 +113,7 @@ internal object CurrencyListPreviewData {
             id = "USDC",
             name = "USD Coin",
             symbol = "USDC",
+            slug = "",
             price = DisplayableNumber(
                 value = BigDecimal(1.00),
                 formatted = "$1.00"
@@ -122,6 +129,7 @@ internal object CurrencyListPreviewData {
             id = "ADA",
             name = "Cardano",
             symbol = "ADA",
+            slug = "",
             price = DisplayableNumber(
                 value = BigDecimal(0.46),
                 formatted = "$0.46"
@@ -137,6 +145,7 @@ internal object CurrencyListPreviewData {
             id = "DOGE",
             name = "Dogecoin",
             symbol = "DOGE",
+            slug = "",
             price = DisplayableNumber(
                 value = BigDecimal(0.085),
                 formatted = "$0.085"
@@ -152,6 +161,7 @@ internal object CurrencyListPreviewData {
             id = "AVAX",
             name = "Avalanche",
             symbol = "AVAX",
+            slug = "",
             price = DisplayableNumber(
                 value = BigDecimal(39.72),
                 formatted = "$39.72"
@@ -167,6 +177,7 @@ internal object CurrencyListPreviewData {
             id = "TRX",
             name = "TRON",
             symbol = "TRX",
+            slug = "",
             price = DisplayableNumber(
                 value = BigDecimal(0.13),
                 formatted = "$0.13"

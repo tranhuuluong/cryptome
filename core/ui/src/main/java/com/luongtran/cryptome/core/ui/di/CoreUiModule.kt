@@ -18,10 +18,17 @@ val coreUiModule = module {
             maximumFractionDigits = 2
         }
     }
+    single<NumberFormat>(qualifier = CryptoAmountFormatterQualifier) {
+        NumberFormat.getInstance().apply {
+            minimumFractionDigits = 2
+            maximumFractionDigits = 2
+        }
+    }
     single<NumberFormatter> {
         DefaultNumberFormatter(
             priceFormatter = get(qualifier = PriceFormatterQualifier),
             percentFormatter = get(qualifier = PercentFormatterQualifier),
+            cryptoAmountFormatter = get(qualifier = CryptoAmountFormatterQualifier),
         )
     }
 }

@@ -11,6 +11,8 @@ data class CryptoCurrencyInfoDto(
     val name: String? = null,
     @SerialName("symbol")
     val symbol: String? = null,
+    @SerialName("slug")
+    val slug: String? = null,
     @SerialName("priceUsd")
     val priceUsd: String? = null,
     @SerialName("changePercent24Hr")

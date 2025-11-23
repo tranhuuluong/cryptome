@@ -10,3 +10,7 @@ object PriceFormatterQualifier : Qualifier {
 object PercentFormatterQualifier : Qualifier {
     override val value: QualifierValue = "PercentFormatterQualifier"
 }
+
+object CryptoAmountFormatterQualifier : Qualifier {
+    override val value: QualifierValue = "CryptoAmountFormatterQualifier"
+}

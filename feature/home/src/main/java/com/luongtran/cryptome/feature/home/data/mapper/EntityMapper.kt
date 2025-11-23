@@ -9,6 +9,7 @@ fun CryptoCurrencyInfoDto.toEntity() = CryptoCurrencyInfoEntity(
     id = id,
     name = name,
     symbol = symbol,
+    slug = slug,
     priceUsd = priceUsd,
     changePercent24Hr = changePercent24Hr,
     marketCapUsd = marketCapUsd,

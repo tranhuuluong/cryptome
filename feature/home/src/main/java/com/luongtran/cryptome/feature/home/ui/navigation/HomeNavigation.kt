@@ -14,12 +14,16 @@ data object HomeScreen
 
 fun NavGraphBuilder.homeScreen(
     onSearchBarClick: () -> Unit,
+    onCoinClick: (String, String) -> Unit,
+    coinDetailDestination: NavGraphBuilder.() -> Unit,
 ) {
     navigation<HomeRoute>(startDestination = HomeScreen) {
         composable<HomeScreen>() {
             HomeScreen(
                 onSearchBarClick = onSearchBarClick,
+                onCoinClick = onCoinClick,
             )
         }
+        coinDetailDestination()
     }
 }

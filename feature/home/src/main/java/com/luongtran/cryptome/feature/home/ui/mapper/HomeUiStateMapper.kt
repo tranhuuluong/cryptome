@@ -21,6 +21,7 @@ private fun CurrencyInfo.toUiModel(numberFormatter: NumberFormatter): CurrencyUi
         id = id,
         name = name,
         symbol = symbol,
+        slug = slug,
         price = DisplayableNumber(
             value = priceUsd,
             formatted = numberFormatter.formatPrice(priceUsd)

@@ -41,6 +41,15 @@ interface CryptoCurrencyInfoDao {
     )
     fun getPopular(limit: Int): Flow<List<CryptoCurrencyInfoEntity>>
 
+    @Query(
+        """
+        SELECT * FROM ${CryptoCurrencyInfoEntity.TABLE_NAME}
+        WHERE ${CryptoCurrencyInfoEntity.COLUMN_ID} = :id
+        LIMIT 1
+        """
+    )
+    suspend fun getById(id: String): CryptoCurrencyInfoEntity?
+
 
     @Query("DELETE FROM ${CryptoCurrencyInfoEntity.TABLE_NAME}")
     suspend fun deleteAll()
