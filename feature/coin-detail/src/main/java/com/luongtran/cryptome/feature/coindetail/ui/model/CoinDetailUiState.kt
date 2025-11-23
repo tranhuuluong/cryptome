@@ -21,6 +21,26 @@ sealed interface CoinDetailUiState {
         val totalSupply: DisplayableNumber,
         val maxSupply: DisplayableNumber,
         val circulatingSupply: DisplayableNumber,
-        val priceHistory: List<Double>,
     ) : CoinDetailUiState
+}
+
+sealed interface CoinPriceChartUiState {
+    data object Loading : CoinPriceChartUiState
+    data object NotAvailable : CoinPriceChartUiState
+    data class Success(
+        val prices: List<Double>,
+        val priceChangePercent: DisplayableNumber,
+    ) : CoinPriceChartUiState
+}
+
+data class PeriodSelectionUi(
+    val periods: List<PriceHistoryPeriodUi>,
+    val selected: PriceHistoryPeriodUi,
+) {
+    companion object {
+        fun default() = PeriodSelectionUi(
+            periods = PriceHistoryPeriodUi.entries,
+            selected = PriceHistoryPeriodUi.DAY,
+        )
+    }
 }

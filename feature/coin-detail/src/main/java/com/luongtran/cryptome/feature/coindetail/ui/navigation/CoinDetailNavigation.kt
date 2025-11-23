@@ -21,9 +21,15 @@ fun NavController.navigateToCoinDetail(
     }
 }
 
-fun NavGraphBuilder.coinDetail() {
+fun NavGraphBuilder.coinDetail(
+    onBackClick: () -> Unit,
+) {
     composable<CoinDetailRoute> { entry ->
         val (id, name) = entry.toRoute<CoinDetailRoute>()
-        CoinDetailScreen(id = id, name = name)
+        CoinDetailScreen(
+            id = id,
+            name = name,
+            onBackClick = onBackClick,
+        )
     }
 }

@@ -46,13 +46,17 @@ class MainActivity : ComponentActivity() {
                             onSearchBarClick = navController::navigateToSearch,
                             onCoinClick = navController::navigateToCoinDetail
                         ) {
-                            coinDetail()
+                            coinDetail(
+                                onBackClick = navController::navigateUp
+                            )
                         }
                         searchScreen(
                             onBackClick = navController::navigateUp,
                             onCoinClick = navController::navigateToCoinDetail
                         ) {
-                            coinDetail()
+                            coinDetail(
+                                onBackClick = navController::navigateUp
+                            )
                         }
                     }
                 }

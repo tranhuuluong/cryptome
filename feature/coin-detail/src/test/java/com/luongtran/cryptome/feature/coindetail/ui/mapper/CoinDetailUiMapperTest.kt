@@ -46,27 +46,21 @@ class CoinDetailUiMapperTest {
             circulatingSupply = 18_500_000.0,
         )
 
-        val uiState = DataStateSuccess(detail).toCoinDetailUiState(formatter)
-        assertTrue(uiState is CoinDetailUiState.Success)
-        uiState as CoinDetailUiState.Success
-
+        val uiState = DataStateSuccess(detail)
+            .toCoinDetailUiState(formatter) as CoinDetailUiState.Success
         assertEquals("btc", uiState.id)
         assertEquals("Bitcoin", uiState.name)
         assertEquals("BTC", uiState.symbol)
         assertEquals("$1,000.12", uiState.priceUsd.formatted)
-        assertEquals("$500.00M", uiState.marketCapUsd.formatted)            // scaled to millions
+        assertEquals("$500.00M", uiState.marketCapUsd.formatted)
         assertEquals(1, uiState.rank)
-        assertEquals("$123,456.00", uiState.volume24Hr.formatted)           // comma + 2 decimals
-        assertEquals(
-            "+2.50%",
-            uiState.priceChange24h.formatted
-        )            // positive percent prefixed with '+'
+        assertEquals("$123,456.00", uiState.volume24Hr.formatted)
+        assertEquals("+2.50%", uiState.priceChange24h.formatted)
         assertEquals("$69,000.00", uiState.allTimeHigh.formatted)
         assertEquals("$65.00", uiState.allTimeLow.formatted)
-        assertEquals("19M BTC", uiState.totalSupply.formatted)             // scaled to millions
+        assertEquals("19M BTC", uiState.totalSupply.formatted)
         assertEquals("21M BTC", uiState.maxSupply.formatted)
-        assertEquals("18.5M BTC", uiState.circulatingSupply.formatted)     // 18.5 after scaling
-        assertEquals(listOf(1.0, 2.0, 3.0), uiState.priceHistory)
+        assertEquals("18.5M BTC", uiState.circulatingSupply.formatted)
     }
 
     @Test
@@ -90,9 +84,8 @@ class CoinDetailUiMapperTest {
             circulatingSupply = nan,
         )
 
-        val uiState = DataStateSuccess(detail).toCoinDetailUiState(formatter)
-        assertTrue(uiState is CoinDetailUiState.Success)
-        uiState as CoinDetailUiState.Success
+        val uiState = DataStateSuccess(detail)
+            .toCoinDetailUiState(formatter) as CoinDetailUiState.Success
 
         assertEquals("N/A", uiState.priceUsd.formatted)
         assertEquals("N/A", uiState.marketCapUsd.formatted)
@@ -108,7 +101,6 @@ class CoinDetailUiMapperTest {
     @Test
     fun error_mapsToErrorState() {
         val uiState = DataStateError(Exception("fail")).toCoinDetailUiState(formatter)
-        assertTrue(uiState is CoinDetailUiState.Error)
         assertEquals("fail", (uiState as CoinDetailUiState.Error).message)
     }
 

@@ -127,6 +127,49 @@ class RemoteDataSourceImplTest {
         assertEquals("Something went wrong!", result.exception.message)
     }
 
+    @Test
+    fun `getPriceHistory returns success using btc_prices json resource`() = runTest {
+        val body = loadResource("btc_prices.json").bufferedReader().use { it.readText() }
+        val engine = MockEngine {
+            respond(
+                content = body,
+                status = HttpStatusCode.OK,
+                headers = headersOf(HttpHeaders.ContentType, "application/json")
+            )
+        }
+        dataSource = createDataSource(engine)
+
+        val result = dataSource.getPriceHistory(
+            slug = "bitcoin",
+            period = "1d",
+            convertSymbol = "USD"
+        ) as DataStateSuccess
+        val dto = result.data
+
+        assertEquals(0.02, dto.priceChange ?: Double.NaN, 0.0)
+        assertEquals(0.02, dto.usdPriceChange ?: Double.NaN, 0.0)
+        assertEquals(5, dto.prices?.size)
+
+        val first = dto.prices?.get(0)
+        assertEquals(1000.0, first?.get(0))
+        assertEquals(100.5, first?.get(1))
+        assertEquals(2_000_000.0, first?.get(2))
+    }
+
+    @Test
+    fun `getPriceHistory returns error on non-2xx response`() = runTest {
+        val engine = MockEngine {
+            respond(
+                content = """{"error":"Not Found"}""",
+                status = HttpStatusCode.NotFound
+            )
+        }
+        dataSource = createDataSource(engine)
+
+        val result = dataSource.getPriceHistory("bitcoin", "1d", "USD") as DataStateError
+        assertEquals("Something went wrong!", result.exception.message)
+    }
+
     private fun createDataSource(engine: HttpClientEngine): RemoteDataSource {
         return RemoteDataSourceImpl(
             assetManager = assetManager,

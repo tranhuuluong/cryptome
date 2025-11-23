@@ -5,10 +5,12 @@ import com.luongtran.cryptome.core.common.model.DataStateSuccess
 import com.luongtran.cryptome.core.common.model.Result
 import com.luongtran.cryptome.core.common.model.StateLoading
 import com.luongtran.cryptome.core.domain.CoinDetail
+import com.luongtran.cryptome.core.domain.PriceHistory
 import com.luongtran.cryptome.core.ui.mapper.getDrawableFor
 import com.luongtran.cryptome.core.ui.model.DisplayableNumber
 import com.luongtran.cryptome.core.ui.utils.NumberFormatter
 import com.luongtran.cryptome.feature.coindetail.ui.model.CoinDetailUiState
+import com.luongtran.cryptome.feature.coindetail.ui.model.CoinPriceChartUiState
 
 fun Result<CoinDetail>.toCoinDetailUiState(numberFormatter: NumberFormatter) = when (this) {
     is DataStateSuccess -> with(data) {
@@ -54,10 +56,26 @@ fun Result<CoinDetail>.toCoinDetailUiState(numberFormatter: NumberFormatter) = w
                 value = circulatingSupply,
                 formatted = numberFormatter.formatCryptoAmount(circulatingSupply, symbol),
             ),
-            priceHistory = priceHistory,
         )
     }
 
     is DataStateError -> CoinDetailUiState.Error(exception.message.orEmpty())
     is StateLoading -> CoinDetailUiState.Loading
+}
+
+fun Result<PriceHistory>.toPriceChartUiState(numberFormatter: NumberFormatter) = when (this) {
+    is DataStateError -> CoinPriceChartUiState.NotAvailable
+    is StateLoading -> CoinPriceChartUiState.Loading
+    is DataStateSuccess -> with(data) {
+        when {
+            prices.isEmpty() -> CoinPriceChartUiState.NotAvailable
+            else -> CoinPriceChartUiState.Success(
+                prices = prices,
+                priceChangePercent = DisplayableNumber(
+                    value = changePercent,
+                    formatted = numberFormatter.formatPercent(changePercent * 100),
+                ),
+            )
+        }
+    }
 }

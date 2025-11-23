@@ -5,6 +5,7 @@ import com.luongtran.cryptome.core.common.model.DataState
 import com.luongtran.cryptome.core.common.model.DataStateError
 import com.luongtran.cryptome.core.common.model.DataStateSuccess
 import com.luongtran.cryptome.core.network.response.CoinDetailDto
+import com.luongtran.cryptome.core.network.response.CoinPriceHistoryDto
 import com.luongtran.cryptome.core.network.response.CryptoCurrencyInfoDto
 import com.luongtran.cryptome.core.network.response.FiatCurrencyInfoDto
 import com.luongtran.cryptome.core.network.util.safeCall
@@ -21,6 +22,11 @@ interface RemoteDataSource {
     suspend fun getCryptoCurrencies(): DataState<List<CryptoCurrencyInfoDto>>
     suspend fun getFiatCurrencies(): DataState<List<FiatCurrencyInfoDto>>
     suspend fun getCoinDetail(slug: String): DataState<CoinDetailDto>
+    suspend fun getPriceHistory(
+        slug: String,
+        period: String,
+        convertSymbol: String
+    ): DataState<CoinPriceHistoryDto>
 }
 
 @OptIn(ExperimentalSerializationApi::class)
@@ -39,6 +45,17 @@ class RemoteDataSourceImpl(
     override suspend fun getCoinDetail(slug: String): DataState<CoinDetailDto> {
         return safeCall<CoinDetailDto> {
             val url = "$BASE_URL/price/v1/token-price/$slug"
+            httpClient.get(url)
+        }
+    }
+
+    override suspend fun getPriceHistory(
+        slug: String,
+        period: String,
+        convertSymbol: String,
+    ): DataState<CoinPriceHistoryDto> {
+        return safeCall<CoinPriceHistoryDto> {
+            val url = "$BASE_URL/price/v2/$period/$slug?convert=$convertSymbol"
             httpClient.get(url)
         }
     }

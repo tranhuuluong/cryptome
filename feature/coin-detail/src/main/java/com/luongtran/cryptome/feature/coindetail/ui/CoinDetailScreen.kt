@@ -2,6 +2,7 @@ package com.luongtran.cryptome.feature.coindetail.ui
 
 import androidx.compose.animation.Crossfade
 import androidx.compose.foundation.layout.Arrangement
+import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.fillMaxSize
@@ -24,7 +25,11 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.unit.dp
 import androidx.lifecycle.compose.collectAsStateWithLifecycle
 import com.luongtran.cryptome.feature.coindetail.ui.component.CoinDetailContent
+import com.luongtran.cryptome.feature.coindetail.ui.component.CoinDetailError
 import com.luongtran.cryptome.feature.coindetail.ui.model.CoinDetailUiState
+import com.luongtran.cryptome.feature.coindetail.ui.model.CoinPriceChartUiState
+import com.luongtran.cryptome.feature.coindetail.ui.model.PeriodSelectionUi
+import com.luongtran.cryptome.feature.coindetail.ui.model.PriceHistoryPeriodUi
 import org.koin.androidx.compose.koinViewModel
 
 @Composable
@@ -33,24 +38,36 @@ fun CoinDetailScreen(
     name: String,
     modifier: Modifier = Modifier,
     viewModel: CoinDetailViewModel = koinViewModel(),
+    onBackClick: () -> Unit,
 ) {
     LaunchedEffect(id) {
         viewModel.fetchCoinDetail(id)
     }
     val uiState by viewModel.uiState.collectAsStateWithLifecycle()
+    val priceChartUiState by viewModel.priceChartUiState.collectAsStateWithLifecycle()
+    val periodSelectionUi by viewModel.periodSelectionUi.collectAsStateWithLifecycle()
     CoinDetailScreen(
         modifier = modifier,
         name = name,
         uiState = uiState,
+        priceChartUiState = priceChartUiState,
+        periodSelectionUi = periodSelectionUi,
+        onBackClick = onBackClick,
+        onRetryClick = viewModel::retry,
+        onPeriodSelected = viewModel::onPricePeriodSelected,
     )
 }
 
 @Composable
 private fun CoinDetailScreen(
     uiState: CoinDetailUiState,
+    priceChartUiState: CoinPriceChartUiState,
+    periodSelectionUi: PeriodSelectionUi,
     name: String,
     modifier: Modifier = Modifier,
     onBackClick: () -> Unit = {},
+    onRetryClick: () -> Unit = {},
+    onPeriodSelected: (PriceHistoryPeriodUi) -> Unit = {},
 ) {
     Column(
         modifier = modifier
@@ -81,17 +98,26 @@ private fun CoinDetailScreen(
             targetState = uiState,
         ) { state ->
             when (state) {
-                is CoinDetailUiState.Loading -> CircularProgressIndicator(
-                    modifier = Modifier.padding(32.dp)
-                )
+                is CoinDetailUiState.Loading -> Box(
+                    modifier = Modifier
+                        .fillMaxSize()
+                        .padding(32.dp),
+                    contentAlignment = Alignment.Center,
+                ) {
+                    CircularProgressIndicator()
+                }
 
                 is CoinDetailUiState.Success -> CoinDetailContent(
                     uiModel = state,
+                    priceChartUiState = priceChartUiState,
+                    periodSelectionUi = periodSelectionUi,
+                    onPeriodSelected = onPeriodSelected,
                 )
 
-                is CoinDetailUiState.Error -> {
-//                    CoinDetailErrorScreen(modifier = modifier)
-                }
+                is CoinDetailUiState.Error -> CoinDetailError(
+                    modifier = Modifier.padding(32.dp),
+                    onRetry = onRetryClick
+                )
             }
 
         }
