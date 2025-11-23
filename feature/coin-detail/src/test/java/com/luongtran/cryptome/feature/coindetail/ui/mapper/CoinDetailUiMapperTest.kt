@@ -4,9 +4,12 @@ import com.luongtran.cryptome.core.common.model.DataStateError
 import com.luongtran.cryptome.core.common.model.DataStateSuccess
 import com.luongtran.cryptome.core.common.model.StateLoading
 import com.luongtran.cryptome.core.domain.CoinDetail
+import com.luongtran.cryptome.core.domain.PriceHistory
+import com.luongtran.cryptome.core.domain.PriceHistoryPeriod
 import com.luongtran.cryptome.core.ui.utils.DefaultNumberFormatter
 import com.luongtran.cryptome.core.ui.utils.NumberFormatter
 import com.luongtran.cryptome.feature.coindetail.ui.model.CoinDetailUiState
+import com.luongtran.cryptome.feature.coindetail.ui.model.CoinPriceChartUiState
 import org.junit.Assert.assertEquals
 import org.junit.Assert.assertTrue
 import org.junit.Test
@@ -108,5 +111,67 @@ class CoinDetailUiMapperTest {
     fun loading_mapsToLoadingState() {
         val uiState = StateLoading.toCoinDetailUiState(formatter)
         assertTrue(uiState is CoinDetailUiState.Loading)
+    }
+
+    @Test
+    fun priceHistory_success_withPrices_mapsToSuccess() {
+        val history = PriceHistory(
+            prices = listOf(10.0, 11.5, 12.3),
+            changePercent = 0.015, // 1.5%
+            period = PriceHistoryPeriod.DAY,
+        )
+        val uiState = DataStateSuccess(history).toPriceChartUiState(formatter)
+        assertTrue(uiState is CoinPriceChartUiState.Success)
+        val success = uiState as CoinPriceChartUiState.Success
+        assertEquals(listOf(10.0, 11.5, 12.3), success.prices)
+        assertEquals(0.015, success.priceChangePercent.value.toDouble(), 0.0)
+        assertEquals("+1.50%", success.priceChangePercent.formatted)
+    }
+
+    @Test
+    fun priceHistory_success_negativeChangePercent_formatsWithMinus() {
+        val history = PriceHistory(
+            prices = listOf(5.0, 4.8),
+            changePercent = -0.0123, // -1.23%
+            period = PriceHistoryPeriod.DAY,
+        )
+        val uiState = DataStateSuccess(history).toPriceChartUiState(formatter)
+        val success = uiState as CoinPriceChartUiState.Success
+        assertEquals("-1.23%", success.priceChangePercent.formatted)
+    }
+
+    @Test
+    fun priceHistory_success_emptyPrices_mapsToNotAvailable() {
+        val history = PriceHistory(
+            prices = emptyList(),
+            changePercent = 0.10,
+            period = PriceHistoryPeriod.DAY,
+        )
+        val uiState = DataStateSuccess(history).toPriceChartUiState(formatter)
+        assertTrue(uiState is CoinPriceChartUiState.NotAvailable)
+    }
+
+    @Test
+    fun priceHistory_error_mapsToNotAvailable() {
+        val uiState = DataStateError(Exception("network")).toPriceChartUiState(formatter)
+        assertTrue(uiState is CoinPriceChartUiState.NotAvailable)
+    }
+
+    @Test
+    fun priceHistory_loading_mapsToLoading() {
+        val uiState = StateLoading.toPriceChartUiState(formatter)
+        assertTrue(uiState is CoinPriceChartUiState.Loading)
+    }
+
+    @Test
+    fun priceHistory_success_withNaNChangePercent_formatsAsNA() {
+        val history = PriceHistory(
+            prices = listOf(1.0, 2.0),
+            changePercent = Double.NaN,
+            period = PriceHistoryPeriod.DAY,
+        )
+        val uiState = DataStateSuccess(history).toPriceChartUiState(formatter)
+        val success = uiState as CoinPriceChartUiState.Success
+        assertEquals("N/A", success.priceChangePercent.formatted)
     }
 }
