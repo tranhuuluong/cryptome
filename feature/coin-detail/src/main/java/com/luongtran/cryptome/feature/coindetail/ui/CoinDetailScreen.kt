@@ -16,16 +16,21 @@ import androidx.compose.material3.CircularProgressIndicator
 import androidx.compose.material3.Icon
 import androidx.compose.material3.IconButton
 import androidx.compose.material3.MaterialTheme
+import androidx.compose.material3.Surface
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.runtime.getValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.tooling.preview.PreviewLightDark
+import androidx.compose.ui.tooling.preview.PreviewParameter
 import androidx.compose.ui.unit.dp
 import androidx.lifecycle.compose.collectAsStateWithLifecycle
+import com.luongtran.cryptome.core.designsystem.theme.CryptomeTheme
 import com.luongtran.cryptome.feature.coindetail.ui.component.CoinDetailContent
 import com.luongtran.cryptome.feature.coindetail.ui.component.CoinDetailError
+import com.luongtran.cryptome.feature.coindetail.ui.component.CoinDetailScreenPreviewParamProvider
 import com.luongtran.cryptome.feature.coindetail.ui.model.CoinDetailUiState
 import com.luongtran.cryptome.feature.coindetail.ui.model.CoinPriceChartUiState
 import com.luongtran.cryptome.feature.coindetail.ui.model.PeriodSelectionUi
@@ -78,7 +83,9 @@ private fun CoinDetailScreen(
         verticalArrangement = Arrangement.spacedBy(16.dp),
     ) {
         Row(
-            modifier = Modifier.fillMaxWidth(),
+            modifier = Modifier
+                .fillMaxWidth()
+                .padding(horizontal = 4.dp),
             verticalAlignment = Alignment.CenterVertically,
             horizontalArrangement = Arrangement.spacedBy(4.dp),
         ) {
@@ -120,6 +127,24 @@ private fun CoinDetailScreen(
                 )
             }
 
+        }
+    }
+}
+
+@PreviewLightDark
+@Composable
+private fun CoinDetailScreenPreview(
+    @PreviewParameter(CoinDetailScreenPreviewParamProvider::class)
+    uiState: CoinDetailUiState,
+) {
+    CryptomeTheme {
+        Surface {
+            CoinDetailScreen(
+                name = "Bitcoin",
+                uiState = uiState,
+                priceChartUiState = CoinPriceChartUiState.Loading,
+                periodSelectionUi = PeriodSelectionUi.default(),
+            )
         }
     }
 }

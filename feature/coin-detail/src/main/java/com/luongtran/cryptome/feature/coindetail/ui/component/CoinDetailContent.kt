@@ -27,16 +27,15 @@ import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.tooling.preview.PreviewLightDark
+import androidx.compose.ui.tooling.preview.PreviewParameter
 import androidx.compose.ui.unit.dp
 import com.luongtran.cryptome.core.designsystem.component.CryptomeFilterChip
 import com.luongtran.cryptome.core.designsystem.theme.CryptomeTheme
-import com.luongtran.cryptome.core.ui.model.DisplayableNumber
 import com.luongtran.cryptome.feature.coindetail.R
 import com.luongtran.cryptome.feature.coindetail.ui.model.CoinDetailUiState
 import com.luongtran.cryptome.feature.coindetail.ui.model.CoinPriceChartUiState
 import com.luongtran.cryptome.feature.coindetail.ui.model.PeriodSelectionUi
 import com.luongtran.cryptome.feature.coindetail.ui.model.PriceHistoryPeriodUi
-import com.luongtran.cryptome.core.ui.R as RUi
 
 @Composable
 fun CoinDetailContent(
@@ -242,57 +241,18 @@ private fun MarketDataContent(
 
 @PreviewLightDark
 @Composable
-private fun CoinDetailContentPreview() {
+private fun CoinDetailContentPreview(
+    @PreviewParameter(PriceChartPreviewParamProvider::class)
+    priceChartUiState: CoinPriceChartUiState
+) {
     CryptomeTheme {
         Surface(
             color = MaterialTheme.colorScheme.background,
         ) {
             CoinDetailContent(
                 modifier = Modifier.padding(16.dp),
-                uiModel = CoinDetailUiState.Success(
-                    id = "bitcoin",
-                    name = "Bitcoin",
-                    symbol = "BTC",
-                    iconRes = RUi.drawable.btc,
-                    rank = 1,
-                    marketCapUsd = DisplayableNumber(
-                        value = 600000000000,
-                        formatted = "$600,000,000,000"
-                    ),
-                    volume24Hr = DisplayableNumber(
-                        value = 35000000000,
-                        formatted = "$35,000,000,000"
-                    ),
-                    circulatingSupply = DisplayableNumber(
-                        value = 19000000,
-                        formatted = "19,000,000 BTC"
-                    ),
-                    totalSupply = DisplayableNumber(
-                        value = 21000000,
-                        formatted = "21,000,000 BTC"
-                    ),
-                    maxSupply = DisplayableNumber(
-                        value = 21000000,
-                        formatted = "21,000,000 BTC"
-                    ),
-                    allTimeHigh = DisplayableNumber(
-                        value = 69000,
-                        formatted = "$69,000"
-                    ),
-                    allTimeLow = DisplayableNumber(
-                        value = 67,
-                        formatted = "$67"
-                    ),
-                    priceUsd = DisplayableNumber(
-                        value = 32000,
-                        formatted = "$32,000"
-                    ),
-                    priceChange24h = DisplayableNumber(
-                        value = -2.5,
-                        formatted = "-2.5%"
-                    ),
-                ),
-                priceChartUiState = CoinPriceChartUiState.Loading,
+                uiModel = CoinDetailScreenPreviewParamData.success,
+                priceChartUiState = priceChartUiState,
                 periodSelectionUi = PeriodSelectionUi.default()
             )
         }

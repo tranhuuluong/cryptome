@@ -32,7 +32,6 @@ import androidx.compose.ui.util.fastMap
 import com.luongtran.cryptome.core.designsystem.theme.AccentGreen
 import com.luongtran.cryptome.core.designsystem.theme.AccentRed
 import com.luongtran.cryptome.core.designsystem.theme.CryptomeTheme
-import com.luongtran.cryptome.core.ui.model.DisplayableNumber
 import com.luongtran.cryptome.feature.coindetail.ui.model.CoinPriceChartUiState
 
 private const val PRICE_LABEL_COUNT = 4
@@ -75,7 +74,7 @@ fun PriceHistoryLineChart(
     ) {
         Text(
             text = priceChangePercentFormatted,
-            style = MaterialTheme.typography.labelSmall.copy(color = color)
+            style = MaterialTheme.typography.labelLarge.copy(color = color)
         )
 
         Box {
@@ -159,13 +158,7 @@ private fun Preview() {
                     .fillMaxWidth()
                     .height(250.dp)
                     .padding(16.dp),
-                uiModel = CoinPriceChartUiState.Success(
-                    prices = listOf(10.0, 12.0, 8.0, 15.0, 20.0, 18.0, 25.0, 22.0, 30.0, 28.0),
-                    priceChangePercent = DisplayableNumber(
-                        value = 5.67,
-                        formatted = "+5.67%"
-                    )
-                )
+                uiModel = PriceChartPreviewParamData.success,
             )
         }
     }
