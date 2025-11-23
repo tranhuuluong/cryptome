@@ -5,7 +5,6 @@ import com.luongtran.cryptome.core.database.entity.FiatCurrencyInfoEntity
 import com.luongtran.cryptome.core.domain.CurrencyInfo
 import org.junit.Assert.assertEquals
 import org.junit.Test
-import java.math.BigDecimal
 
 class CurrencyInfoMapperTest {
 

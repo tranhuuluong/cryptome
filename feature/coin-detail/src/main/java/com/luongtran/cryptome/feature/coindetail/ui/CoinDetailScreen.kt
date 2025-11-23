@@ -1,6 +1,5 @@
 package com.luongtran.cryptome.feature.coindetail.ui
 
-import androidx.compose.animation.AnimatedContent
 import androidx.compose.animation.Crossfade
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column

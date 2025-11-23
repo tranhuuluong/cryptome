@@ -54,7 +54,8 @@ fun FakeChart(
 fun PreviewFakeCharts() {
     CryptomeTheme {
         FakeChart(
-            modifier = Modifier.width(50.dp)
+            modifier = Modifier
+                .width(50.dp)
                 .height(30.dp),
             lineColor = Color.Red
         )

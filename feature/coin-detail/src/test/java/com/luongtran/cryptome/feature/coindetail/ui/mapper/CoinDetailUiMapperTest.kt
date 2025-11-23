@@ -57,7 +57,10 @@ class CoinDetailUiMapperTest {
         assertEquals("$500.00M", uiState.marketCapUsd.formatted)            // scaled to millions
         assertEquals(1, uiState.rank)
         assertEquals("$123,456.00", uiState.volume24Hr.formatted)           // comma + 2 decimals
-        assertEquals("+2.50%", uiState.priceChange24h.formatted)            // positive percent prefixed with '+'
+        assertEquals(
+            "+2.50%",
+            uiState.priceChange24h.formatted
+        )            // positive percent prefixed with '+'
         assertEquals("$69,000.00", uiState.allTimeHigh.formatted)
         assertEquals("$65.00", uiState.allTimeLow.formatted)
         assertEquals("19M BTC", uiState.totalSupply.formatted)             // scaled to millions

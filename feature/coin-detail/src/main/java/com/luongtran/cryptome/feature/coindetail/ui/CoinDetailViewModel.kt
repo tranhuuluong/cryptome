@@ -8,7 +8,6 @@ import com.luongtran.cryptome.feature.coindetail.domain.CoinDetailRepository
 import com.luongtran.cryptome.feature.coindetail.ui.mapper.toCoinDetailUiState
 import com.luongtran.cryptome.feature.coindetail.ui.model.CoinDetailUiState
 import kotlinx.coroutines.flow.SharingStarted
-import kotlinx.coroutines.flow.filter
 import kotlinx.coroutines.flow.flatMapLatest
 import kotlinx.coroutines.flow.map
 import kotlinx.coroutines.flow.stateIn

@@ -9,7 +9,7 @@ import com.luongtran.cryptome.feature.coindetail.ui.CoinDetailScreen
 import kotlinx.serialization.Serializable
 
 @Serializable
-data class CoinDetailRoute(val id: String, val name: String,)
+data class CoinDetailRoute(val id: String, val name: String)
 
 fun NavController.navigateToCoinDetail(
     id: String,

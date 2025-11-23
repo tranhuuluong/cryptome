@@ -1,8 +1,8 @@
 package com.luongtran.cryptome.core.network.di
 
 import com.luongtran.cryptome.core.common.qualifier.IoDispatcherQualifier
-import com.luongtran.cryptome.core.network.RemoteDataSourceImpl
 import com.luongtran.cryptome.core.network.RemoteDataSource
+import com.luongtran.cryptome.core.network.RemoteDataSourceImpl
 import io.ktor.client.HttpClient
 import io.ktor.client.engine.okhttp.OkHttp
 import io.ktor.client.plugins.HttpTimeout

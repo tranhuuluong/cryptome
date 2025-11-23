@@ -2,9 +2,9 @@ package com.luongtran.cryptome.feature.coindetail.ui
 
 import androidx.lifecycle.SavedStateHandle
 import app.cash.turbine.test
-import com.luongtran.cryptome.core.common.model.Result
 import com.luongtran.cryptome.core.common.model.DataStateError
 import com.luongtran.cryptome.core.common.model.DataStateSuccess
+import com.luongtran.cryptome.core.common.model.Result
 import com.luongtran.cryptome.core.common.model.StateLoading
 import com.luongtran.cryptome.core.domain.CoinDetail
 import com.luongtran.cryptome.core.ui.utils.DefaultNumberFormatter
@@ -128,6 +128,7 @@ class CoinDetailViewModelTest {
                         )
                     )
                 )
+
                 "error" -> emit(DataStateError(Exception("fail")))
                 else -> emit(DataStateError(Exception("not found")))
             }

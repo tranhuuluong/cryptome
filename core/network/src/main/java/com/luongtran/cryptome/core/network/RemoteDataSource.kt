@@ -4,8 +4,8 @@ import com.luongtran.cryptome.core.common.manager.AssetManager
 import com.luongtran.cryptome.core.common.model.DataState
 import com.luongtran.cryptome.core.common.model.DataStateError
 import com.luongtran.cryptome.core.common.model.DataStateSuccess
-import com.luongtran.cryptome.core.network.response.CryptoCurrencyInfoDto
 import com.luongtran.cryptome.core.network.response.CoinDetailDto
+import com.luongtran.cryptome.core.network.response.CryptoCurrencyInfoDto
 import com.luongtran.cryptome.core.network.response.FiatCurrencyInfoDto
 import com.luongtran.cryptome.core.network.util.safeCall
 import io.ktor.client.HttpClient
