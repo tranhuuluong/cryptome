@@ -38,6 +38,7 @@ class SearchViewModelTest {
             minimumFractionDigits = 2
             maximumFractionDigits = 2
         },
+        cryptoAmountFormatter = NumberFormat.getNumberInstance(),
     )
 
     @Before
@@ -112,9 +113,10 @@ class SearchViewModelTest {
                     id = "btc",
                     name = "Bitcoin",
                     symbol = "BTC",
-                    priceUsd = BigDecimal("1000.12"),
-                    changePercent24Hr = BigDecimal("2.50"),
-                    marketCapUsd = BigDecimal("10000"),
+                    slug = "bitcoin",
+                    priceUsd = 1000.12,
+                    changePercent24Hr = 2.50,
+                    marketCapUsd = 10000.0,
                     rank = 1,
                     tradable = true,
                 )

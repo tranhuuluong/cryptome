@@ -7,7 +7,6 @@ import com.luongtran.cryptome.feature.search.ui.model.SearchUiState
 import org.junit.Assert.assertEquals
 import org.junit.Assert.assertTrue
 import org.junit.Test
-import java.math.BigDecimal
 import java.text.NumberFormat
 import java.util.Locale
 
@@ -21,6 +20,7 @@ class SearchUiMapperTest {
             minimumFractionDigits = 2
             maximumFractionDigits = 2
         },
+        cryptoAmountFormatter = NumberFormat.getNumberInstance(),
     )
 
     @Test
@@ -39,9 +39,10 @@ class SearchUiMapperTest {
             id = "btc",
             name = "Bitcoin",
             symbol = "BTC",
-            priceUsd = BigDecimal("1000.12"),
-            changePercent24Hr = BigDecimal("2.50"),
-            marketCapUsd = BigDecimal("10000"),
+            slug = "bitcoin",
+            priceUsd = 1000.12,
+            changePercent24Hr = 2.50,
+            marketCapUsd = 10000.0,
             rank = 1,
             tradable = true,
         )
@@ -60,7 +61,7 @@ class SearchUiMapperTest {
             name = "US Dollar",
             symbol = "$",
             code = "USD",
-            priceUsd = BigDecimal("1.00"),
+            priceUsd = 1.00,
             tradable = true,
         )
         val result = listOf(fiat).toSearchUiState(
@@ -77,9 +78,10 @@ class SearchUiMapperTest {
             id = "eth",
             name = "Ethereum",
             symbol = "ETH",
-            priceUsd = BigDecimal("2000.00"),
-            changePercent24Hr = BigDecimal("1.25"),
-            marketCapUsd = BigDecimal("20000"),
+            slug = "ethereum",
+            priceUsd = 2000.00,
+            changePercent24Hr = 1.25,
+            marketCapUsd = 20000.0,
             rank = 2,
             tradable = true,
         )
@@ -96,7 +98,7 @@ class SearchUiMapperTest {
             name = "Euro",
             symbol = "€",
             code = "EUR",
-            priceUsd = BigDecimal("1.10"),
+            priceUsd = 1.10,
             tradable = true,
         )
         val result = listOf(fiat).toPopularSearches(numberFormatter)
