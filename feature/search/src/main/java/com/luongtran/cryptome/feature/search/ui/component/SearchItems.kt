@@ -1,11 +1,15 @@
 package com.luongtran.cryptome.feature.search.ui.component
 
 import androidx.compose.foundation.Image
+import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.PaddingValues
 import androidx.compose.foundation.layout.Row
+import androidx.compose.foundation.layout.WindowInsets
+import androidx.compose.foundation.layout.asPaddingValues
 import androidx.compose.foundation.layout.fillMaxWidth
+import androidx.compose.foundation.layout.navigationBars
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.lazy.LazyColumn
@@ -38,10 +42,11 @@ fun SearchItems(
     searchQuery: String,
     modifier: Modifier = Modifier,
     contentPadding: PaddingValues = PaddingValues(0.dp),
+    onCoinClick: (String, String) -> Unit = { _, _ -> },
 ) {
     LazyColumn(
         modifier = modifier,
-        contentPadding = contentPadding,
+        contentPadding = WindowInsets.navigationBars.asPaddingValues(),
     ) {
         items(
             items = items,
@@ -49,8 +54,10 @@ fun SearchItems(
         ) { item ->
             SearchItem(
                 modifier = Modifier.animateItem(),
+                contentPadding = contentPadding,
                 searchQuery = searchQuery,
                 uiModel = item,
+                onCoinClick = onCoinClick,
             )
         }
     }
@@ -60,12 +67,15 @@ fun SearchItems(
 private fun SearchItem(
     uiModel: SearchCurrencyUi,
     searchQuery: String,
-    modifier: Modifier = Modifier
+    modifier: Modifier = Modifier,
+    contentPadding: PaddingValues = PaddingValues(0.dp),
+    onCoinClick: (String, String) -> Unit = { _, _ -> },
 ) {
     Row(
         modifier = modifier
             .fillMaxWidth()
-            .padding(vertical = 12.dp),
+            .clickable { onCoinClick(uiModel.id, uiModel.name) }
+            .padding(contentPadding),
         verticalAlignment = Alignment.CenterVertically,
         horizontalArrangement = Arrangement.spacedBy(12.dp)
     ) {
@@ -135,7 +145,7 @@ fun SearchItemsPreview() {
     CryptomeTheme {
         Surface {
             SearchItems(
-                contentPadding = PaddingValues(16.dp),
+                contentPadding = PaddingValues(horizontal = 16.dp, vertical = 12.dp),
                 searchQuery = "",
                 items = listOf(
                     SearchCurrencyUi(

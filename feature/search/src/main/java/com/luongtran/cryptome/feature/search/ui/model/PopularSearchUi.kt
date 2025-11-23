@@ -6,6 +6,7 @@ import com.luongtran.cryptome.core.ui.model.DisplayableNumber
 data class PopularSearchUi(
     val id: String,
     val code: String,
+    val name: String,
     val priceUsd: DisplayableNumber,
     val changePercent24Hr: DisplayableNumber,
     val rank: Int,

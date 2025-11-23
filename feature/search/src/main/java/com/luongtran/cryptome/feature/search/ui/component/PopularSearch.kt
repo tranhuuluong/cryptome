@@ -1,6 +1,7 @@
 package com.luongtran.cryptome.feature.search.ui.component
 
 import androidx.compose.foundation.Image
+import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.PaddingValues
@@ -29,13 +30,15 @@ import com.luongtran.cryptome.core.ui.R as RUi
 
 @Composable
 fun PopularSearch(
+    uiModel: PopularSearchUi,
     modifier: Modifier = Modifier,
     contentPadding: PaddingValues = PaddingValues(0.dp),
-    uiModel: PopularSearchUi,
+    onCoinClick: (String, String) -> Unit = { _, _ -> },
 ) {
     Row(
         modifier = modifier
             .fillMaxWidth()
+            .clickable { onCoinClick(uiModel.id, uiModel.name) }
             .padding(contentPadding),
         verticalAlignment = Alignment.CenterVertically,
         horizontalArrangement = Arrangement.spacedBy(12.dp),
@@ -93,6 +96,7 @@ private fun PopularSearchPreview() {
     val uiModel = PopularSearchUi(
         id = "bitcoin",
         code = "BTC",
+        name = "Bitcoin",
         priceUsd = DisplayableNumber(
             value = BigDecimal("90000.00"),
             formatted = "$90,000.00"

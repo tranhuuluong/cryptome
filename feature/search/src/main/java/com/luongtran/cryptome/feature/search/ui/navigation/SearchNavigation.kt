@@ -22,12 +22,16 @@ fun NavController.navigateToSearch(
 
 fun NavGraphBuilder.searchScreen(
     onBackClick: () -> Unit,
+    onCoinClick: (String, String) -> Unit,
+    coinDetailDestination: NavGraphBuilder.() -> Unit,
 ) {
     navigation<SearchRoute>(startDestination = SearchScreen) {
         composable<SearchScreen>() {
             SearchScreen(
                 onBackClick = onBackClick,
+                onCoinClick = onCoinClick,
             )
         }
+        coinDetailDestination()
     }
 }

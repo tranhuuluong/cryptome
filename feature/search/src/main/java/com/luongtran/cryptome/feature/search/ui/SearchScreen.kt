@@ -53,7 +53,8 @@ import com.luongtran.cryptome.core.ui.R as RUi
 fun SearchScreen(
     modifier: Modifier = Modifier,
     viewModel: SearchViewModel = koinViewModel(),
-    onBackClick: () -> Unit = {},
+    onBackClick: () -> Unit,
+    onCoinClick: (String, String) -> Unit,
 ) {
     val searchQuery by viewModel.searchQuery.collectAsStateWithLifecycle()
     val uiState by viewModel.uiState.collectAsStateWithLifecycle()
@@ -65,6 +66,7 @@ fun SearchScreen(
         onSearchQueryChanged = viewModel::onSearchQueryChange,
         onSearchTriggered = viewModel::onSearchTriggered,
         onClearRecentSearchesClick = viewModel::clearRecentSearches,
+        onCoinClick = onCoinClick,
     )
 }
 
@@ -77,6 +79,7 @@ private fun SearchScreen(
     onSearchQueryChanged: (String) -> Unit = {},
     onSearchTriggered: (String) -> Unit = {},
     onClearRecentSearchesClick: () -> Unit = {},
+    onCoinClick: (String, String) -> Unit = { _, _ -> },
 ) {
     val focusManager = LocalFocusManager.current
     val keyboardController = LocalSoftwareKeyboardController.current
@@ -86,9 +89,6 @@ private fun SearchScreen(
         hideKeyBoard()
         onSearchTriggered(it)
     }
-    val navigationBarPadding = WindowInsets.navigationBars
-        .asPaddingValues()
-        .calculateBottomPadding()
     Column(
         modifier = modifier.fillMaxSize(),
         horizontalAlignment = Alignment.CenterHorizontally,
@@ -134,17 +134,15 @@ private fun SearchScreen(
         when (uiState) {
             is SearchUiState.Idle -> LazyColumn(
                 state = lazyListState,
-                contentPadding = PaddingValues(
-                    start = 16.dp,
-                    end = 16.dp,
-                    bottom = navigationBarPadding,
-                ),
+                contentPadding = WindowInsets.navigationBars.asPaddingValues(),
             ) {
                 val recentSearches = uiState.recentSearches
                 if (recentSearches.isNotEmpty()) {
                     item {
                         RecentSearches(
-                            modifier = Modifier.animateItem(),
+                            modifier = Modifier
+                                .animateItem()
+                                .padding(horizontal = 16.dp),
                             recentSearches = recentSearches,
                             onRecentSearchClick = onSearchExplicitlyTriggered,
                             onClearRecentSearchesClick = onClearRecentSearchesClick,
@@ -161,7 +159,7 @@ private fun SearchScreen(
                         Text(
                             modifier = Modifier
                                 .animateItem()
-                                .padding(vertical = 8.dp),
+                                .padding(vertical = 8.dp, horizontal = 16.dp),
                             text = stringResource(R.string.popular_searches),
                             style = MaterialTheme.typography.labelLarge,
                         )
@@ -173,7 +171,8 @@ private fun SearchScreen(
                         PopularSearch(
                             modifier = Modifier.animateItem(),
                             uiModel = popularSearch,
-                            contentPadding = PaddingValues(vertical = 8.dp),
+                            contentPadding = PaddingValues(vertical = 8.dp, horizontal = 16.dp),
+                            onCoinClick = onCoinClick,
                         )
                     }
                 }
@@ -182,14 +181,10 @@ private fun SearchScreen(
             SearchUiState.Loading -> CircularProgressIndicator()
             is SearchUiState.Empty -> SearchEmptyView(query = uiState.searchQuery)
             is SearchUiState.Success -> SearchItems(
-                contentPadding = PaddingValues(
-                    start = 16.dp,
-                    end = 16.dp,
-                    top = 16.dp,
-                    bottom = navigationBarPadding,
-                ),
+                contentPadding = PaddingValues(horizontal = 16.dp, vertical = 12.dp),
                 items = uiState.currencies,
                 searchQuery = searchQuery,
+                onCoinClick = onCoinClick,
             )
         }
     }
@@ -210,6 +205,7 @@ private fun SearchScreenPreview() {
                         PopularSearchUi(
                             id = "bitcoin",
                             code = "BTC",
+                            name = "Bitcoin",
                             priceUsd = DisplayableNumber(
                                 value = BigDecimal("90000.00"),
                                 formatted = "$90,000.00"

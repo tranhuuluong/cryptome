@@ -48,7 +48,12 @@ class MainActivity : ComponentActivity() {
                         ) {
                             coinDetail()
                         }
-                        searchScreen(onBackClick = navController::navigateUp)
+                        searchScreen(
+                            onBackClick = navController::navigateUp,
+                            onCoinClick = navController::navigateToCoinDetail
+                        ) {
+                            coinDetail()
+                        }
                     }
                 }
             }

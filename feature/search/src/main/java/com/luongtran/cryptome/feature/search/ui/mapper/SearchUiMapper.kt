@@ -32,6 +32,7 @@ private fun CurrencyInfo.Crypto.toPopularSearchUi(
 ) = PopularSearchUi(
     id = id,
     code = symbol,
+    name = name,
     priceUsd = DisplayableNumber(
         value = priceUsd,
         formatted = numberFormatter.formatPrice(priceUsd)
